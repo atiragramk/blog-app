@@ -1,44 +1,63 @@
 import styled from "styled-components";
-import { Button, Card } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Button, Spinner, Container } from "reactstrap";
+import ReactPaginate from "react-paginate";
 
 export const StyledButton = styled(Button)`
   display: block;
   margin: 10px auto;
   background-color: white;
-`;
-
-export const StyledCard = styled(Card)`
-  margin: 10px;
-  max-width: 400px;
-  text-align: center;
-  padding: 7px;
-  border-radius: 5px;
-  box-shadow: 0px 1px 5px rgb(244 233 235);
-  h4 {
-    font-weight: bold;
-  }
-  p {
-    min-height: 100px;
-    margin-bottom: 15px;
-  }
-`;
-
-export const StyledLink = styled(Link)`
-  border: 1px solid gray;
-  color: rgb(33 37 41);
-  text-decoration: none;
-  padding: 3px 5px;
-  min-width: 65px;
-  border-radius: 5px;
-  display: block-size;
+  color: rgb(110 45 53);
+  border-color: rgb(110 45 53);
   &:hover {
     color: white;
-    background-color: rgb(33 37 41);
+    background-color: rgb(110 45 53);
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.25rem rgb(110 45 53 / 50%);
+  }
+  &:active {
+    background-color: rgb(110 45 53);
+    border-color: none;
   }
 `;
 
-export const StyledWrapper = styled.div`
+export const StyledSpinner = styled(Spinner)`
   display: flex;
-  justify-content: space-evenly;
+  margin: 0 auto;
+  color: rgb(110 45 53);
+`;
+
+export const StyledContainer = styled(Container)`
+  display: flex;
+  padding-right: 0;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+
+export const StyledReactPaginate = styled(ReactPaginate)`
+  display: flex;
+  list-style: none;
+  margin: 30px auto;
+  padding-left: 0px;
+  width: fit-content;
+  border: 1px solid rgb(186 182 182);
+  border-radius: 5px;
+
+  li {
+    padding: 7px 15px;
+    color: rgb(110 45 53);
+    border-right: 1px solid #dee2e6;
+    &.active {
+      background-color: rgb(110 45 53);
+      color: white;
+    }
+  }
+  a {
+    color: rgb(110 45 53);
+    text-decoration: none;
+    &.disabled {
+      pointer-events: none;
+      color: gray;
+    }
+  }
 `;

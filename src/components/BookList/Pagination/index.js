@@ -1,1 +1,0 @@
-export { PaginationMenu } from './Pagination'

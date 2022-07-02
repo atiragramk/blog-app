@@ -1,35 +1,56 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { getBook } from "../../api/books";
 import { useParams } from "react-router-dom";
-import { Container, Spinner, Button } from "reactstrap";
-export const BookInfo = () => {
-  const [bookInfo, setBookInfo] = useState([]);
-  const [loading, setLoading] = useState(true);
+import { Container } from "reactstrap";
+import { ErrorMessage } from "../ErrorMessage";
+import {
+  StyledHeader,
+  StyledWrapper,
+  StyledText,
+  StyledDate,
+  StyledLink,
+  StyledSpinner,
+} from "./styled";
+import moment from "moment";
 
-  const { id } = useParams();
+export const BookInfo = () => {
+  
+  const [bookInfo, setBookInfo] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  const { routeId } = useParams();
 
   useEffect(() => {
-    const url = `https://fakerestapi.azurewebsites.net/api/v1/Books/${id}`;
-    axios.get(url).then((response) => {
-      setBookInfo(response.data);
-      setLoading(false);
-    });
-  }, [id]);
+    getBook(routeId)
+      .then((response) => {
+        setBookInfo(response);
+        setLoading(false);
+      })
+      .catch(() => {
+        setError(true);
+      });
+  }, []);
 
   const { description, title, publishDate } = bookInfo;
-  const date = new Date(publishDate).toLocaleString();
+  const date = moment(publishDate).format('DD/MM/YYYY')
+
+  if (loading && !Object.keys(bookInfo).length) {
+    return <StyledSpinner />;
+  }
+
+  if (error) {
+    return <ErrorMessage />;
+  }
+
   return (
     <Container>
-      <Button href="/book">Back to list</Button>
-      {loading ? (
-        Spinner
-      ) : (
-        <>
-          <h2>{title}</h2>
-          <p>{description}</p>
-          <span>{date}</span>
-        </>
-      )}
+      <StyledWrapper>
+        <StyledHeader>{title}</StyledHeader>
+        <StyledText>{description}</StyledText>
+        <StyledDate>{date}</StyledDate>
+      </StyledWrapper>
+      <StyledLink to="/books">Back to list</StyledLink>
     </Container>
   );
 };

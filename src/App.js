@@ -1,25 +1,28 @@
-import { Header } from "./components/Header";
-import { AuthorInfo } from "./components/AuthorInfo";
-import { BookList } from "./components/BookList";
-import { BookInfo } from "./components/BookInfo";
+import { Layout } from "./components/Layout";
 import { Statistic } from "./components/Statistic";
-import { StyledWrapper } from "./styled";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Container } from "reactstrap";
+import { lazy } from "react";
+
+const HomePage = lazy(() => import("./pages/HomePage"));
+const BooksPage = lazy(() => import("./pages/BooksPage"));
+const SingleBookPage = lazy(() => import("./pages/SingleBookPage"))
 
 
 function App() {
   return (
-    <Router>
-      <StyledWrapper>
-        <Header />
-      </StyledWrapper>
-      <Routes>
-        <Route path="/" element={<AuthorInfo />} />
-        <Route path="/book" element={<BookList />} />
-        <Route path="/book/:id" element={<BookInfo />} />
-        <Route path="/statistic" element={<Statistic />} />
-      </Routes>
-    </Router>
+    <Container>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<HomePage />} />
+            <Route path="books" element={<BooksPage />} />
+            <Route path="books/:routeId" element={<SingleBookPage />} />
+            <Route path="statistics" element={<Statistic />} />
+          </Route>
+        </Routes>
+      </Router>
+    </Container>
   );
 }
 
