@@ -44,7 +44,7 @@ export const BookList = (props) => {
     return <StyledSpinner />;
   }
 
-  if (error && !loading) {
+  if (error) {
     return <ErrorMessage />;
   }
 

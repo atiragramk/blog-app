@@ -3,25 +3,24 @@ import { Spinner } from "reactstrap";
 import { Link } from "react-router-dom";
 
 export const StyledWrapper = styled.div`
-    display: flex;
-    margin: 20px auto;
-    flex-direction: column;
-`
+  display: flex;
+  margin: 50px auto;
+  flex-direction: column;
+`;
 
 export const StyledHeader = styled.h2`
-    font-weight: bold;
-    margin: 0px auto;
-`
+  font-weight: bold;
+  margin: 0px auto;
+`;
 
 export const StyledText = styled.p`
-    margin: 20px 0;
-    font-size: 20px;
-`
-
+  margin: 20px 0;
+  font-size: 20px;
+`;
 
 export const StyledDate = styled.span`
-    font-style:italic;
-`
+  font-style: italic;
+`;
 
 export const StyledLink = styled(Link)`
   border: 1px solid rgb(110 45 53);
