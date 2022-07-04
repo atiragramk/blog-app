@@ -14,7 +14,6 @@ import {
 import moment from "moment";
 
 export const BookInfo = () => {
-  
   const [bookInfo, setBookInfo] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -29,28 +28,29 @@ export const BookInfo = () => {
       })
       .catch(() => {
         setError(true);
-      });
-  }, []);
+      })
+      .finally(() => {
+        setLoading(false);
+      })
+  }, [routeId]);
 
   const { description, title, publishDate } = bookInfo;
-  const date = moment(publishDate).format('DD/MM/YYYY')
-
-  if (loading && !Object.keys(bookInfo).length) {
-    return <StyledSpinner />;
-  }
-
-  if (error) {
-    return <ErrorMessage />;
-  }
+  const date = moment(publishDate).format("DD/MM/YYYY");
 
   return (
     <Container>
-      <StyledWrapper>
-        <StyledHeader>{title}</StyledHeader>
-        <StyledText>{description}</StyledText>
-        <StyledDate>{date}</StyledDate>
-      </StyledWrapper>
-      <StyledLink to="/books">Back to list</StyledLink>
+      {loading && !Object.keys(bookInfo).length && !error && <StyledSpinner />}
+      {!loading && bookInfo && !error && (
+        <>
+          <StyledWrapper>
+            <StyledHeader>{title}</StyledHeader>
+            <StyledText>{description}</StyledText>
+            <StyledDate>{date}</StyledDate>
+          </StyledWrapper>
+          <StyledLink to="/books">Back to list</StyledLink>
+        </>
+      )}
+      {error && !loading && <ErrorMessage />}
     </Container>
   );
 };

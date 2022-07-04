@@ -18,44 +18,47 @@ export const Statistic = () => {
       })
       .catch(() => {
         setError(true);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
-  const columns = useMemo(() => [
-    {
-      Header: "ID",
-      accessor: "id",
-    },
-    {
-      Header: "NAME",
-      accessor: "title",
-    },
-    {
-      Header: "DESCRIPTION",
-      accessor: "description",
-      Cell: ({ cell: { value } }) => `${value.slice(0, 130)}...`,
-    },
-    {
-      Header: "PAGES",
-      accessor: "pageCount",
-    },
-    {
-      Header: "CREATE DATE",
-      accessor: "publishDate",
-      Cell: ({ cell: { value } }) => moment(value).format("DD/MM/YYYY"),
-    },
-  ], []);
-
-  if (loading && !bookList.length) {
-    return <StyledSpinner />;
-  }
-  if (error) {
-    return <ErrorMessage />;
-  }
+  const columns = useMemo(
+    () => [
+      {
+        Header: "ID",
+        accessor: "id",
+      },
+      {
+        Header: "NAME",
+        accessor: "title",
+      },
+      {
+        Header: "DESCRIPTION",
+        accessor: "description",
+        Cell: ({ cell: { value } }) => `${value.slice(0, 130)}...`,
+      },
+      {
+        Header: "PAGES",
+        accessor: "pageCount",
+      },
+      {
+        Header: "CREATE DATE",
+        accessor: "publishDate",
+        Cell: ({ cell: { value } }) => moment(value).format("DD/MM/YYYY"),
+      },
+    ],
+    []
+  );
 
   return (
     <StyledContainer>
-      <BookTable columns={columns} data={bookList} />
+      {loading && !bookList.length && !error && <StyledSpinner />}
+      {bookList && !loading && !error && (
+        <BookTable columns={columns} data={bookList} />
+      )}
+      {error && !loading && <ErrorMessage />}
     </StyledContainer>
   );
 };

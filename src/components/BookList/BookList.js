@@ -32,6 +32,9 @@ export const BookList = (props) => {
       })
       .catch(() => {
         setError(true);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [itemOffset, itemsPerPage]);
 
@@ -40,42 +43,40 @@ export const BookList = (props) => {
     setItemOffset(newOffset);
   };
 
-  if (loading && !bookList.length) {
-    return <StyledSpinner />;
-  }
-
-  if (error) {
-    return <ErrorMessage />;
-  }
-
   return (
     <Container>
-      <StyledButton>Create book</StyledButton>
-      <StyledContainer>
-        {bookList.map((book) => {
-          const { id, description, title, publishDate } = book;
-          return (
-            <BookCard
-              id={id}
-              key={id}
-              description={description}
-              title={title}
-              publishDate={publishDate}
-            />
-          );
-        })}
-      </StyledContainer>
-      <StyledReactPaginate
-        breakLabel="..."
-        activeClassName="active"
-        disabledLinkClassName="disabled"
-        nextLabel="next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={3}
-        pageCount={pageCount}
-        previousLabel="< previous"
-        renderOnZeroPageCount={null}
-      />
+      {loading && !error && !bookList.length && <StyledSpinner />}
+      {bookList && !loading && !error && (
+        <>
+          <StyledButton>Create book</StyledButton>
+          <StyledContainer>
+            {bookList.map((book) => {
+              const { id, description, title, publishDate } = book;
+              return (
+                <BookCard
+                  id={id}
+                  key={id}
+                  description={description}
+                  title={title}
+                  publishDate={publishDate}
+                />
+              );
+            })}
+          </StyledContainer>
+          <StyledReactPaginate
+            breakLabel="..."
+            activeClassName="active"
+            disabledLinkClassName="disabled"
+            nextLabel="next >"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            pageCount={pageCount}
+            previousLabel="< previous"
+            renderOnZeroPageCount={null}
+          />
+        </>
+      )}
+      {error && !loading && <ErrorMessage />}
     </Container>
   );
 };

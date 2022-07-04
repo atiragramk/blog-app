@@ -9,7 +9,6 @@ import {
 } from "./styled";
 import { Outlet } from "react-router-dom";
 import { Suspense } from "react";
-import { Spinner } from "reactstrap";
 
 import logo from "../../assets/img/logo.png";
 
@@ -29,7 +28,7 @@ export const Layout = () => {
           <StyledNavLink to="statistics">Statistics</StyledNavLink>
         </StyledMenu>
       </StyledContainer>
-      <Suspense fallback={<Spinner color="success">Loading...</Spinner>}>
+      <Suspense >
         <Outlet />
       </Suspense>
     </>
