@@ -3,6 +3,7 @@ import { getBook } from "../../api/books";
 import { useParams } from "react-router-dom";
 import { Container } from "reactstrap";
 import { ErrorMessage } from "../ErrorMessage";
+import { useLocation } from "react-router-dom";
 import {
   StyledHeader,
   StyledWrapper,
@@ -20,6 +21,10 @@ export const BookInfo = () => {
 
   const { routeId } = useParams();
 
+  const location = useLocation();
+  const { offset } = location.state;
+
+
   useEffect(() => {
     getBook(routeId)
       .then((response) => {
@@ -31,7 +36,7 @@ export const BookInfo = () => {
       })
       .finally(() => {
         setLoading(false);
-      })
+      });
   }, [routeId]);
 
   const { description, title, publishDate } = bookInfo;
@@ -47,7 +52,9 @@ export const BookInfo = () => {
             <StyledText>{description}</StyledText>
             <StyledDate>{date}</StyledDate>
           </StyledWrapper>
-          <StyledLink to="/books">Back to list</StyledLink>
+          <StyledLink state={{ offset: offset }} to="/books">
+            Back to list
+          </StyledLink>
         </>
       )}
       {error && !loading && <ErrorMessage />}

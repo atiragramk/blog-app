@@ -11,7 +11,7 @@ const Statistics = lazy(() => import("./pages/Statistics"));
 function App() {
   return (
     <Container>
-      <Router>
+      <Router basename="/blog-app">
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />

@@ -46,7 +46,7 @@ export const StyledReactPaginate = styled(ReactPaginate)`
   li {
     padding: 7px 15px;
     color: rgb(110 45 53);
-    border-right: 1px solid #dee2e6;
+    border-left: 1px solid #dee2e6;
     &.active {
       background-color: rgb(110 45 53);
       color: white;

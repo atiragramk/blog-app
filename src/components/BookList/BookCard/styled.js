@@ -18,7 +18,7 @@ export const StyledCardTitle = styled(CardTitle)`
 export const StyledCardText = styled(CardText)`
   min-height: 80px;
   margin-bottom: 15px;
-  font-size: 18px;
+  font-size: 16px;
 `;
 
 export const StyledDate = styled(CardSubtitle)`

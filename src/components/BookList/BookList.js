@@ -3,6 +3,7 @@ import { getAllBooks } from "../../api/books";
 import { Container } from "reactstrap";
 import { BookCard } from "./BookCard";
 import { ErrorMessage } from "../ErrorMessage";
+import { useLocation } from "react-router-dom";
 import {
   StyledButton,
   StyledSpinner,
@@ -17,8 +18,20 @@ export const BookList = (props) => {
   const [itemOffset, setItemOffset] = useState(0);
   const [pageCount, setPageCount] = useState(0);
   const [dataLength, setDataLength] = useState(0);
+  const [forsePage, setForcePage] = useState(0);
 
   const { itemsPerPage } = props;
+  const location = useLocation();
+  const { state } = location;
+
+  useEffect(() => {
+    if (state) {
+      const { offset } = state;
+      setItemOffset(offset);
+      const page = Math.floor(offset / itemsPerPage);
+      setForcePage(page);
+    }
+  }, [state, itemsPerPage]);
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
@@ -59,12 +72,14 @@ export const BookList = (props) => {
                   description={description}
                   title={title}
                   publishDate={publishDate}
+                  offset={itemOffset}
                 />
               );
             })}
           </StyledContainer>
           <StyledReactPaginate
             breakLabel="..."
+            forcePage={forsePage}
             activeClassName="active"
             disabledLinkClassName="disabled"
             nextLabel="next >"

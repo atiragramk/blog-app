@@ -14,7 +14,7 @@ export const StyledWrapper = styled.div`
   align-items: center;
 `;
 
-export const StyledText = styled.h3`
+export const StyledText = styled.h4`
   color: rgb(61 66 64);
 `;
 
@@ -29,7 +29,7 @@ export const StyledMenu = styled(Nav)`
 `;
 
 export const StyledNavLink = styled(NavLink)`
-  font-size: 22px;
+  font-size: 18px;
   text-decoration: none;
   padding: 4px 15px;
   color: rgb(110 45 53);

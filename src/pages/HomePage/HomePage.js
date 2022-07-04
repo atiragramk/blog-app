@@ -17,7 +17,8 @@ export default function HomePage() {
         </StyledText>
         <StyledText>
           I'm really enjoy about reading books especially novels by Stephen
-          King! Also I like watching superhero movies and play quizes and board
+          King! 
+          Also I like watching superhero movies and play quizes and board
           games.
         </StyledText>
         <StyledText>So...Here we go!</StyledText>

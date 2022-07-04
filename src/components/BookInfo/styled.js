@@ -8,14 +8,14 @@ export const StyledWrapper = styled.div`
   flex-direction: column;
 `;
 
-export const StyledHeader = styled.h2`
+export const StyledHeader = styled.h3`
   font-weight: bold;
   margin: 0px auto;
 `;
 
 export const StyledText = styled.p`
   margin: 20px 0;
-  font-size: 20px;
+  font-size: 16px;
 `;
 
 export const StyledDate = styled.span`

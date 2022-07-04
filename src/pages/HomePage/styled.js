@@ -14,5 +14,5 @@ export const StyledWrapper = styled.div`
 `
 export const StyledText = styled.p`
     padding: 10px;
-    font-size: 20px;
+    font-size: 16px;
 `;
