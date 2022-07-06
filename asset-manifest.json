@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.js": "/blog-app/static/js/main.af1509eb.js",
-    "static/js/902.21595846.chunk.js": "/blog-app/static/js/902.21595846.chunk.js",
-    "static/js/358.388943b8.chunk.js": "/blog-app/static/js/358.388943b8.chunk.js",
-    "static/js/121.dbe6e02c.chunk.js": "/blog-app/static/js/121.dbe6e02c.chunk.js",
-    "static/js/253.6338f474.chunk.js": "/blog-app/static/js/253.6338f474.chunk.js",
+    "main.js": "/blog-app/static/js/main.8ec34bee.js",
+    "static/js/718.21994fcd.chunk.js": "/blog-app/static/js/718.21994fcd.chunk.js",
+    "static/js/162.780441e0.chunk.js": "/blog-app/static/js/162.780441e0.chunk.js",
+    "static/js/345.d736abea.chunk.js": "/blog-app/static/js/345.d736abea.chunk.js",
+    "static/js/253.917ee2a8.chunk.js": "/blog-app/static/js/253.917ee2a8.chunk.js",
     "static/js/282.351a863c.chunk.js": "/blog-app/static/js/282.351a863c.chunk.js",
     "static/js/135.98e51e4b.chunk.js": "/blog-app/static/js/135.98e51e4b.chunk.js",
     "static/media/error.gif": "/blog-app/static/media/error.d9aa7b1a785ebcbec41f.gif",
     "static/media/photo.jpg": "/blog-app/static/media/photo.5ec44a11426f9ea5e0d9.jpg",
     "static/media/logo.png": "/blog-app/static/media/logo.a144b667bbaca0500d18.png",
     "index.html": "/blog-app/index.html",
-    "main.af1509eb.js.map": "/blog-app/static/js/main.af1509eb.js.map",
-    "902.21595846.chunk.js.map": "/blog-app/static/js/902.21595846.chunk.js.map",
-    "358.388943b8.chunk.js.map": "/blog-app/static/js/358.388943b8.chunk.js.map",
-    "121.dbe6e02c.chunk.js.map": "/blog-app/static/js/121.dbe6e02c.chunk.js.map",
-    "253.6338f474.chunk.js.map": "/blog-app/static/js/253.6338f474.chunk.js.map",
+    "main.8ec34bee.js.map": "/blog-app/static/js/main.8ec34bee.js.map",
+    "718.21994fcd.chunk.js.map": "/blog-app/static/js/718.21994fcd.chunk.js.map",
+    "162.780441e0.chunk.js.map": "/blog-app/static/js/162.780441e0.chunk.js.map",
+    "345.d736abea.chunk.js.map": "/blog-app/static/js/345.d736abea.chunk.js.map",
+    "253.917ee2a8.chunk.js.map": "/blog-app/static/js/253.917ee2a8.chunk.js.map",
     "282.351a863c.chunk.js.map": "/blog-app/static/js/282.351a863c.chunk.js.map",
     "135.98e51e4b.chunk.js.map": "/blog-app/static/js/135.98e51e4b.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.af1509eb.js"
+    "static/js/main.8ec34bee.js"
   ]
 }
