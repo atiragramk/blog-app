@@ -7,7 +7,7 @@ import {
 
 import photo from "../../assets/img/photo.jpg";
 
-export default function HomePage() {
+export default function Home() {
   return (
     <StyledContainer>
       <StyledImage src={photo} alt="photo" />

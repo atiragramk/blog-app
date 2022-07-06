@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { getBook } from "../../api/books";
 import { useParams } from "react-router-dom";
 import { Container } from "reactstrap";
@@ -13,39 +12,23 @@ import {
   StyledSpinner,
 } from "./styled";
 import moment from "moment";
+import { useAxios } from "../../hooks";
 
 export const BookInfo = () => {
-  const [bookInfo, setBookInfo] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
 
   const { routeId } = useParams();
+  const { data, error, loading} = useAxios(() => getBook(routeId))
 
   const location = useLocation();
   const { offset } = location.state;
 
-
-  useEffect(() => {
-    getBook(routeId)
-      .then((response) => {
-        setBookInfo(response);
-        setLoading(false);
-      })
-      .catch(() => {
-        setError(true);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [routeId]);
-
-  const { description, title, publishDate } = bookInfo;
+  const { description, title, publishDate } = data;
   const date = moment(publishDate).format("DD/MM/YYYY");
 
   return (
     <Container>
-      {loading && !Object.keys(bookInfo).length && !error && <StyledSpinner />}
-      {!loading && bookInfo && !error && (
+      {loading && !error && <StyledSpinner />}
+      {!loading && !error && (
         <>
           <StyledWrapper>
             <StyledHeader>{title}</StyledHeader>

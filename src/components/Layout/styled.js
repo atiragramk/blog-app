@@ -25,7 +25,7 @@ export const StyledImage = styled.img`
 
 export const StyledMenu = styled(Nav)`
   justify-content: space-between;
-  width: 400px;
+  width: 300px;
 `;
 
 export const StyledNavLink = styled(NavLink)`

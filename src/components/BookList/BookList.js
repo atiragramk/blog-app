@@ -10,15 +10,16 @@ import {
   StyledContainer,
   StyledReactPaginate,
 } from "./styled";
+import { useAxios } from "../../hooks";
 
 export const BookList = (props) => {
+  
   const [bookList, setBookList] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
   const [itemOffset, setItemOffset] = useState(0);
   const [pageCount, setPageCount] = useState(0);
   const [dataLength, setDataLength] = useState(0);
   const [forsePage, setForcePage] = useState(0);
+  const { request, error, loading } = useAxios(getAllBooks);
 
   const { itemsPerPage } = props;
   const location = useLocation();
@@ -35,21 +36,14 @@ export const BookList = (props) => {
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
-
-    getAllBooks()
-      .then((response) => {
-        setDataLength(response.length);
-        setPageCount(Math.ceil(response.length / itemsPerPage));
-        setBookList(response.slice(itemOffset, endOffset));
-        setLoading(false);
-      })
-      .catch(() => {
-        setError(true);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [itemOffset, itemsPerPage]);
+    
+    request().then(data => {
+      setDataLength(data.length);
+      setPageCount(Math.ceil(data.length / itemsPerPage));
+      setBookList(data.slice(itemOffset, endOffset));
+    });
+    
+  }, [itemOffset, itemsPerPage, request]);
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % dataLength;
@@ -58,8 +52,8 @@ export const BookList = (props) => {
 
   return (
     <Container>
-      {loading && !error && !bookList.length && <StyledSpinner />}
-      {bookList && !loading && !error && (
+      {loading && !error && <StyledSpinner />}
+      {!loading && !error && (
         <>
           <StyledButton>Create book</StyledButton>
           <StyledContainer>

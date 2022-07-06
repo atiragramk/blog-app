@@ -1,28 +1,14 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { getAllBooks } from "../../api/books";
+import { useAxios } from "../../hooks";
 import { BookTable } from "./BookTable";
 import { ErrorMessage } from "../ErrorMessage";
 import { StyledContainer, StyledSpinner } from "./styled";
 import moment from "moment";
 
 export const Statistic = () => {
-  const [bookList, setBookList] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
 
-  useEffect(() => {
-    getAllBooks()
-      .then((response) => {
-        setBookList(response);
-        setLoading(false);
-      })
-      .catch(() => {
-        setError(true);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+  const { data, loading, error } = useAxios(getAllBooks);
 
   const columns = useMemo(
     () => [
@@ -54,9 +40,9 @@ export const Statistic = () => {
 
   return (
     <StyledContainer>
-      {loading && !bookList.length && !error && <StyledSpinner />}
-      {bookList && !loading && !error && (
-        <BookTable columns={columns} data={bookList} />
+      {loading && !error && <StyledSpinner />}
+      {!loading && !error && (
+        <BookTable columns={columns} data={data} />
       )}
       {error && !loading && <ErrorMessage />}
     </StyledContainer>

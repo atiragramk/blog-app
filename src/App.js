@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Container } from "reactstrap";
 import { lazy } from "react";
 
-const HomePage = lazy(() => import("./pages/HomePage"));
-const BooksPage = lazy(() => import("./pages/BooksPage"));
-const SingleBookPage = lazy(() => import("./pages/SingleBookPage"));
+const HomePage = lazy(() => import("./pages/Home"));
+const BooksPage = lazy(() => import("./pages/Books"));
+const SingleBookPage = lazy(() => import("./pages/SingleBook"));
 const Statistics = lazy(() => import("./pages/Statistics"));
 
 function App() {
