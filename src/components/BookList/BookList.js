@@ -7,21 +7,21 @@ import { useLocation } from "react-router-dom";
 import {
   StyledButton,
   StyledSpinner,
-  StyledContainer,
-  StyledReactPaginate,
+  StyledContainer
 } from "./styled";
 import { useAxios } from "../../hooks";
+import { BookPagination } from "./Pagination";
 
-export const BookList = (props) => {
+export const BookList = () => {
   
   const [bookList, setBookList] = useState([]);
   const [itemOffset, setItemOffset] = useState(0);
-  const [pageCount, setPageCount] = useState(0);
+  const [pageCount, setPageCount] = useState();
   const [dataLength, setDataLength] = useState(0);
-  const [forsePage, setForcePage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(9);
+  const [currentPage, setCurrentPage] = useState(0);
   const { request, error, loading } = useAxios(getAllBooks);
 
-  const { itemsPerPage } = props;
   const location = useLocation();
   const { state } = location;
 
@@ -30,30 +30,32 @@ export const BookList = (props) => {
       const { offset } = state;
       setItemOffset(offset);
       const page = Math.floor(offset / itemsPerPage);
-      setForcePage(page);
+      setCurrentPage(page);
     }
   }, [state, itemsPerPage]);
 
   useEffect(() => {
+
     const endOffset = itemOffset + itemsPerPage;
-    
     request().then(data => {
       setDataLength(data.length);
-      setPageCount(Math.ceil(data.length / itemsPerPage));
       setBookList(data.slice(itemOffset, endOffset));
+      setPageCount(Math.ceil(data.length / itemsPerPage));
     });
     
-  }, [itemOffset, itemsPerPage, request]);
+  }, [itemOffset, itemsPerPage, request, pageCount]);
 
-  const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % dataLength;
+  const handlePagination = (event, index) => {
+    event.preventDefault();
+    const newOffset = (index * itemsPerPage) % dataLength;
+    setCurrentPage(index)
     setItemOffset(newOffset);
   };
 
   return (
     <Container>
       {loading && !error && <StyledSpinner />}
-      {!loading && !error && (
+      {!loading && !error && pageCount && (
         <>
           <StyledButton>Create book</StyledButton>
           <StyledContainer>
@@ -71,18 +73,9 @@ export const BookList = (props) => {
               );
             })}
           </StyledContainer>
-          <StyledReactPaginate
-            breakLabel="..."
-            forcePage={forsePage}
-            activeClassName="active"
-            disabledLinkClassName="disabled"
-            nextLabel="next >"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={3}
-            pageCount={pageCount}
-            previousLabel="< previous"
-            renderOnZeroPageCount={null}
-          />
+          <BookPagination currentPage={currentPage} 
+          onPagination={handlePagination}
+          pageCount={pageCount}/>
         </>
       )}
       {error && !loading && <ErrorMessage />}
