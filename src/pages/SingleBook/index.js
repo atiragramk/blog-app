@@ -1,1 +1,1 @@
-export { default } from "./SingleBook"
+export { default } from "./BookItem"

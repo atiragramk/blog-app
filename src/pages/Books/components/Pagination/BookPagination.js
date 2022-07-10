@@ -18,7 +18,7 @@ export const BookPagination = (props) => {
       {[...Array(pageCount).keys()].map((page, index) => (
         <PaginationItem key={page}>
           <StyledPaginationLink 
-          active={index === currentPage}
+          active={index === currentPage ? 'active' : null}
           onClick={(event) => onPagination(event, index)} href="#">
             {index + 1}
           </StyledPaginationLink>

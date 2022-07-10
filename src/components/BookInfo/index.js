@@ -1,1 +1,0 @@
-export { BookInfo } from './BookInfo'
