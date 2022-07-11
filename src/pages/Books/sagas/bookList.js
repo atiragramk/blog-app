@@ -1,22 +1,22 @@
 import { put, call, takeLatest, select } from "redux-saga/effects";
 import { getAllBooks } from "../../../api/books";
 
-import { BOOK_LIST_FETCH_START } from "../action-types/bookList";
 import {
+  bookListFetchStart,
   bookListFetchError,
   bookListFetchInProgress,
   bookListFetchSuccess,
   bookListSetPage,
   bookListSetPageCount,
   bookListSetOffset,
-} from "../actions/bookList";
+} from "../slice/bookListSlice";
 
 import {
   bookListItemsPerPageSelector,
   bookListOffsetSelector,
 } from "../selectors/bookItem";
 
-function* bookListFetchSaga({ payload: { page } }) {
+function* bookListFetchSaga({payload}) {
   try {
     yield put(bookListFetchInProgress());
 
@@ -26,9 +26,9 @@ function* bookListFetchSaga({ payload: { page } }) {
     const pageCount = yield Math.ceil(data.length / itemsPerPage);
     const endOffset = offset + itemsPerPage;
     const bookList = yield data.slice(offset, endOffset);
-    const newOffset = yield (page * itemsPerPage) % data.length;
+    const newOffset = yield (payload * itemsPerPage) % data.length;
 
-    yield put(bookListSetPage(page));
+    yield put(bookListSetPage(payload));
     yield put(bookListSetPageCount(pageCount));
     yield put(bookListFetchSuccess(bookList));
     yield put(bookListSetOffset(newOffset));
@@ -38,5 +38,5 @@ function* bookListFetchSaga({ payload: { page } }) {
 }
 
 export default function* bookListFetchWatcher() {
-  yield takeLatest(BOOK_LIST_FETCH_START, bookListFetchSaga);
+  yield takeLatest(bookListFetchStart, bookListFetchSaga);
 }

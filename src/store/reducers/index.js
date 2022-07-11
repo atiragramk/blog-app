@@ -1,12 +1,11 @@
 import { combineReducers } from "redux";
 
-import bookItemReducer from "../../pages/SingleBook/reducers/bookItem";
-import bookListStatisticReducer from "../../pages/Statistics/reducers/bookList"
-import bookListReducer from "../../pages/Books/reducers/bookList"
-
+import bookItem from "../../pages/SingleBook/slice/bookItemSLice";
+import bookListStatistic from "../../pages/Statistics/slice/bookListStatSlice";
+import bookList from "../../pages/Books/slice/bookListSlice";
 
 export default combineReducers({
-    bookItem: bookItemReducer,
-    bookListStatistic: bookListStatisticReducer,
-    bookList: bookListReducer,
-})
+  bookItem,
+  bookListStatistic,
+  bookList,
+});

@@ -5,7 +5,7 @@ import { ErrorMessage } from "../../components/ErrorMessage";
 import { StyledContainer, StyledSpinner } from "./styled";
 import { ErrorBoundary } from "../../components/ErrorBoundary";
 import * as selectors from "./selectors/bookItem";
-import { bookStatisticFetchStart } from "./actions/bookList";
+import { bookListStatisticFetchStart } from "./slice/bookListStatSlice";
 import moment from "moment";
 
 export default function Statistics() {
@@ -16,7 +16,7 @@ export default function Statistics() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(bookStatisticFetchStart());
+    dispatch(bookListStatisticFetchStart());
   }, [dispatch]);
 
   const columns = useMemo(
