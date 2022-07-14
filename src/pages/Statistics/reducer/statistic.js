@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getAllBooks } from "../../../api/books";
+import { createSlice } from "@reduxjs/toolkit";
+import { bookListStatisticFetch } from "../thunk";
 
 const initialState = {
   data: [],
@@ -7,16 +7,12 @@ const initialState = {
   loading: true,
 };
 
-export const bookListStatisticFetch = createAsyncThunk("bookListStatisticFetch", async () => {
-  return await getAllBooks();
-});
+const name = "BOOK_STATISTIC";
 
 const bookListStatisticSlice = createSlice({
-  name: "bookListStatistic",
+  name: name,
   initialState,
-  reducers: {
-    bookListStatisticFetchStart() {},
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(bookListStatisticFetch.pending, (state) => {
@@ -34,6 +30,5 @@ const bookListStatisticSlice = createSlice({
   },
 });
 
-export const { bookListStatisticFetchStart } = bookListStatisticSlice.actions;
 
 export default bookListStatisticSlice.reducer;

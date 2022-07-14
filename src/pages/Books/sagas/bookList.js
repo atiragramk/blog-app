@@ -6,37 +6,26 @@ import {
   bookListFetchError,
   bookListFetchInProgress,
   bookListFetchSuccess,
-  bookListSetPage,
-  bookListSetPageCount,
-  bookListSetOffset,
-} from "../slice/bookListSlice";
+  bookListPagination
+} from "../reducer/bookList";
 
 import {
-  bookListItemsPerPageSelector,
-  bookListOffsetSelector,
+  bookListPaginationSelector
 } from "../selectors/bookItem";
 
 function* bookListFetchSaga({payload}) {
   try {
     yield put(bookListFetchInProgress());
-
     const data = yield call(getAllBooks);
-    const offset = yield select(bookListOffsetSelector);
-    const itemsPerPage = yield select(bookListItemsPerPageSelector);
-    const pageCount = yield Math.ceil(data.length / itemsPerPage);
-    const endOffset = offset + itemsPerPage;
-    const bookList = yield data.slice(offset, endOffset);
+    yield put(bookListFetchSuccess(data));
+    const {itemsPerPage, pageCount} = yield select(bookListPaginationSelector);
     const newOffset = yield (payload * itemsPerPage) % data.length;
-
-    yield put(bookListSetPage(payload));
-    yield put(bookListSetPageCount(pageCount));
-    yield put(bookListFetchSuccess(bookList));
-    yield put(bookListSetOffset(newOffset));
+    yield put(bookListPagination({offset: newOffset, page: payload, pageCount}));
   } catch {
     yield put(bookListFetchError());
   }
 }
 
 export default function* bookListFetchWatcher() {
-  yield takeLatest(bookListFetchStart, bookListFetchSaga);
+  yield takeLatest(bookListFetchStart.type, bookListFetchSaga);
 }

@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 
-import bookItem from "../../pages/SingleBook/slice/bookItemSLice";
-import bookListStatistic from "../../pages/Statistics/slice/bookListStatSlice";
-import bookList from "../../pages/Books/slice/bookListSlice";
+import bookItem from "../../pages/SingleBook/reducer/bookItem";
+import bookListStatistic from "../../pages/Statistics/reducer/statistic";
+import bookList from "../../pages/Books/reducer/bookList";
 
 export default combineReducers({
   bookItem,

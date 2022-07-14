@@ -7,14 +7,14 @@ import { useDispatch, useSelector } from "react-redux";
 import * as selectors from "./selectors/bookItem";
 import { StyledButton, StyledSpinner, StyledContainer } from "./styled";
 import { BookPagination } from "./components/Pagination";
-import { bookListFetchStart } from "./slice/bookListSlice";
+import { bookListFetchStart } from "./reducer/bookList";
 
 export default function BookList() {
   const loading = useSelector(selectors.bookListLoadingSelector);
   const error = useSelector(selectors.bookListErrorSelector);
   const data = useSelector(selectors.bookListDataSelector);
-  const page = useSelector(selectors.bookListPageSelector);
-  const pageCount = useSelector(selectors.bookListPageCountSelector);
+  const {offset, page, pageCount, endOffset} = useSelector(selectors.bookListPaginationSelector);
+  const bookList = data.slice(offset, endOffset);
 
   const dispatch = useDispatch();
 
@@ -26,6 +26,7 @@ export default function BookList() {
     event.preventDefault();
     dispatch(bookListFetchStart(index));
   };
+  
 
   return (
     <ErrorBoundary>
@@ -35,15 +36,14 @@ export default function BookList() {
           <>
             <StyledButton>Create book</StyledButton>
             <StyledContainer>
-              {data.map((book) => {
-                const { id, description, title, publishDate } = book;
+              {bookList.map((book) => {
                 return (
                   <BookCard
-                    id={id}
-                    key={id}
-                    description={description}
-                    title={title}
-                    publishDate={publishDate}
+                    id={book.id}
+                    key={book.id}
+                    description={book.description}
+                    title={book.title}
+                    publishDate={book.publishDate}
                   />
                 );
               })}

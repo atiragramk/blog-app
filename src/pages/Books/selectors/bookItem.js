@@ -17,22 +17,15 @@ export const bookListErrorSelector = createSelector(
   (bookList) => bookList.error
 );
 
-export const bookListPageSelector = createSelector(
+export const bookListPaginationSelector = createSelector(
   bookListStateSelector,
-  (bookList) => bookList.page
-);
-
-export const bookListOffsetSelector = createSelector(
-  bookListStateSelector,
-  (bookList) => bookList.offset
-);
-
-export const bookListPageCountSelector = createSelector(
-  bookListStateSelector,
-  (bookList) => bookList.pageCount
-);
-
-export const bookListItemsPerPageSelector = createSelector(
-  bookListStateSelector,
-  (bookList) => bookList.itemsPerPage
-);
+  (bookList) => {
+    return {
+      page: bookList.page,
+      offset:bookList.offset,
+      itemsPerPage:bookList.itemsPerPage,
+      pageCount: Math.ceil(bookList.data.length / bookList.itemsPerPage),
+      endOffset: bookList.offset + bookList.itemsPerPage,
+    }
+  }
+)

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"
 import { Container } from "reactstrap";
 import { ErrorMessage } from "../../components/ErrorMessage";
+import { bookItemFetch } from "./thunk";
 import * as selectors from "./selectors/bookItem"
 import {
   StyledHeader,
@@ -14,7 +15,6 @@ import {
   StyledSpinner,
 } from "./styled";
 import moment from "moment";
-import { bookItemFetchStart } from "./slice/bookItemSLice";
 
 export default function BookItem() {
   const { routeId } = useParams();
@@ -25,7 +25,7 @@ export default function BookItem() {
   const dispatch = useDispatch();
   
   useEffect(() => {
-    dispatch(bookItemFetchStart(routeId));
+    dispatch(bookItemFetch(routeId));
   }, [dispatch, routeId])
 
   return (
