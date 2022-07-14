@@ -9,17 +9,18 @@ export const BookPagination = (props) => {
     <StyledPagination>
       <PaginationItem disabled={currentPage <= 0}>
         <StyledPaginationLink
-          onClick={(event) => onPagination(event, currentPage - 1)}
+          onClick={() => onPagination(currentPage - 1)}
           previous
-          href="#"
+          tag="button"
         />
       </PaginationItem>
 
       {[...Array(pageCount).keys()].map((page, index) => (
         <PaginationItem key={page}>
           <StyledPaginationLink 
+          tag="button"
           active={index === currentPage ? 'active' : null}
-          onClick={(event) => onPagination(event, index)} href="#">
+          onClick={() => onPagination(index)}>
             {index + 1}
           </StyledPaginationLink>
         </PaginationItem>
@@ -27,9 +28,9 @@ export const BookPagination = (props) => {
 
       <PaginationItem disabled={currentPage >= pageCount - 1}>
         <StyledPaginationLink
-          onClick={(event) => onPagination(event, currentPage + 1)}
+          tag="button"
+          onClick={() => onPagination(currentPage + 1)}
           next
-          href="#"
         />
       </PaginationItem>
     </StyledPagination>

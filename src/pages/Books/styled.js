@@ -8,16 +8,23 @@ export const StyledButton = styled(Button)`
   background-color: white;
   color: rgb(110 45 53);
   border-color: rgb(110 45 53);
+  padding: 5px 10px;
   &:hover {
-    color: white;
     background-color: rgb(110 45 53);
+    border-color: rgb(110 45 53);
+    color: #fff;
   }
-  &:focus {
-    box-shadow: 0 0 0 0.25rem rgb(110 45 53 / 50%);
+  &:active:focus {
+    background-color: rgb(110 45 53);
+    border-color: rgb(110 45 53);
   }
   &:active {
     background-color: rgb(110 45 53);
-    border-color: none;
+    border-color: rgb(110 45 53);
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.25rem rgb(110 45 53 / 50%);
+    color: rgb(110 45 53);
   }
 `;
 

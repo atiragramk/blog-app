@@ -7,6 +7,8 @@ import {
   bookPagination,
 } from "../actions/bookList";
 
+import { bookListDelete } from "../thunk";
+
 const initialState = {
   data: [],
   error: null,
@@ -28,6 +30,25 @@ const bookListSlice = createSlice({
     bookListFetchSuccess: bookFetchSuccess,
     bookListFetchError: bookFetchError,
     bookListPagination: bookPagination,
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(bookListDelete.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(bookListDelete.fulfilled, (state, action) => {
+        console.log(action)
+        return {
+          ...state,
+          loading: false,
+          data: state.data.filter((book) => book.id !== action.meta.arg)
+        }
+      })
+      .addCase(bookListDelete.rejected, (state) => {
+        state.loading = false;
+        state.error = true;
+      });
   },
 });
 

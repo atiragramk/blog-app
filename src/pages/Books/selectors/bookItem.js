@@ -21,6 +21,7 @@ export const bookListPaginationSelector = createSelector(
   bookListStateSelector,
   (bookList) => {
     return {
+      data: bookList.data,
       page: bookList.page,
       offset:bookList.offset,
       itemsPerPage:bookList.itemsPerPage,

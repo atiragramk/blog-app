@@ -23,7 +23,7 @@ export default function Statistics() {
     () => [
       {
         Header: "ID",
-        accessor: "id",
+        accessor: "_id",
       },
       {
         Header: "NAME",
@@ -39,7 +39,7 @@ export default function Statistics() {
         accessor: "pageCount",
       },
       {
-        Header: "CREATE DATE",
+        Header: "DATE",
         accessor: "publishDate",
         Cell: ({ cell: { value } }) => moment(value).format("DD/MM/YYYY"),
       },
