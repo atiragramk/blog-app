@@ -14,7 +14,7 @@ import {
   StyledSpinner,
 } from "./styled";
 import moment from "moment";
-import { bookItemFetchStart } from "./actions/bookItem";
+import { bookItemFetchStart } from "./slice/bookItemSLice";
 
 export default function BookItem() {
   const { routeId } = useParams();
@@ -25,7 +25,7 @@ export default function BookItem() {
   const dispatch = useDispatch();
   
   useEffect(() => {
-    dispatch(bookItemFetchStart(routeId))
+    dispatch(bookItemFetchStart(routeId));
   }, [dispatch, routeId])
 
   return (

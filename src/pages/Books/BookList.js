@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as selectors from "./selectors/bookItem";
 import { StyledButton, StyledSpinner, StyledContainer } from "./styled";
 import { BookPagination } from "./components/Pagination";
-import { bookListFetchStart } from "./actions/bookList";
+import { bookListFetchStart } from "./slice/bookListSlice";
 
 export default function BookList() {
   const loading = useSelector(selectors.bookListLoadingSelector);
