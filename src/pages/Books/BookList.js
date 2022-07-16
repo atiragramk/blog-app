@@ -1,69 +1,58 @@
-import { ErrorBoundary } from "../../components/ErrorBoundary";
 import { useEffect } from "react";
 import { Container } from "reactstrap";
-
-import { DeleteModal } from "./components/DeleteModal";
-import CustomModal from "../../components/Modal";
+import { DeleteModal } from "./components/Modal/DeleteModal";
 import { BookCard } from "./components/BookCard";
 import { ErrorMessage } from "../../components/ErrorMessage";
-import { useDispatch, useSelector } from "react-redux";
-import * as selectors from "./selectors/bookItem";
+import { ErrorBoundary } from "../../components/ErrorBoundary";
 import { StyledButton, StyledSpinner, StyledContainer } from "./styled";
-import { BookPagination } from "./components/Pagination";
-import { bookListFetchStart } from "./reducer/bookList";
-import { useState } from "react";
-import { bookListDelete } from "./thunk";
+import { useDispatch, useSelector } from "react-redux";
+import { createModalSelector } from "./components/Modal/selectors/modal";
+import * as selectors from "./selectors/bookList";
+import { BookPagination } from "../../components/Pagination";
+import { bookListFetch } from "./thunk/bookList";
+import { bookPaginationSet } from "../../components/Pagination/reducer/pagination";
+import { bookListPaginationSelector } from "../../components/Pagination/selectors/pagination";
+import CreateModal from "./components/Modal/CreateModal";
+import UpdateModal from "./components/Modal/UpdateModal";
+import { createModalOpen } from "./components/Modal/reducer/createModal";
 
 export default function BookList() {
   const loading = useSelector(selectors.bookListLoadingSelector);
   const error = useSelector(selectors.bookListErrorSelector);
   const data = useSelector(selectors.bookListDataSelector);
-  const { offset, page, pageCount, endOffset } = useSelector(
-    selectors.bookListPaginationSelector
+  const { offset, page, itemsPerPage, endOffset } = useSelector(
+    bookListPaginationSelector
   );
 
+  const { open } = useSelector(createModalSelector);
+
   const bookList = data.slice(offset, endOffset);
-  const [open, setOpen] = useState(false);
-  const [title, setTitle] = useState();
-  const [id, setId] = useState();
+  const pageCount = Math.ceil(data.length / itemsPerPage);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(bookListFetchStart(page));
-  }, [dispatch, page]);
+    dispatch(bookListFetch());
+  }, [dispatch]);
 
   const handlePagination = (index) => {
-    dispatch(bookListFetchStart(index));
+    const newOffset = (index * itemsPerPage) % data.length;
+    dispatch(bookPaginationSet({ page: index, offset: newOffset }));
   };
 
-  const handleToggleModal = (id, title) => {
-    setOpen(!open);
-    setId(id);
-    setTitle(title);
-  };
-
-  const handleDelete = (id) => {
-    dispatch(bookListDelete(id));
-    dispatch(bookListFetchStart(page));
-    setOpen(!open);
+  const handleOpenCreateModal = () => {
+    dispatch(createModalOpen(open));
   };
 
   return (
     <ErrorBoundary>
       <Container>
         {loading && !error && <StyledSpinner />}
-        {!loading && !error && pageCount && (
+        {!loading && !error && data.length > 0 && (
           <>
-            <CustomModal
-              open={open}
-              onConfirm={handleDelete}
-              id={id}
-              onToggle={handleToggleModal}
-            >
-              <DeleteModal title={title} />
-            </CustomModal>
-            <StyledButton color="light">Create book</StyledButton>
+            <StyledButton onClick={handleOpenCreateModal} color="light">
+              Create book
+            </StyledButton>
             <StyledContainer>
               {bookList.map((book) => {
                 return (
@@ -73,7 +62,6 @@ export default function BookList() {
                     description={book.description}
                     title={book.title}
                     publishDate={book.publishDate}
-                    onOpenModal={handleToggleModal}
                   />
                 );
               })}
@@ -85,6 +73,9 @@ export default function BookList() {
             />
           </>
         )}
+        <CreateModal form="create" />
+        {/* <UpdateModal form="update" /> */}
+        <DeleteModal />
         {error && !loading && <ErrorMessage />}
       </Container>
     </ErrorBoundary>

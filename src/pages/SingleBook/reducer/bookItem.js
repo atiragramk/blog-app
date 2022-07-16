@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { bookItemFetch } from "../thunk";
+import { bookItemFetch } from "../thunk/bookItem";
 
 const initialState = {
   data: {},
@@ -7,8 +7,7 @@ const initialState = {
   loading: true,
 };
 
-const name = "BOOK_ITEM"
-
+const name = "BOOK_ITEM";
 
 const bookItemSlice = createSlice({
   name,

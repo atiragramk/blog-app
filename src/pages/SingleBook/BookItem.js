@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"
 import { Container } from "reactstrap";
 import { ErrorMessage } from "../../components/ErrorMessage";
-import { bookItemFetch } from "./thunk";
+import { bookItemFetch } from "./thunk/bookItem";
 import * as selectors from "./selectors/bookItem"
 import {
   StyledHeader,

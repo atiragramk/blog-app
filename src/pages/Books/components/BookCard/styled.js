@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export const StyledCard = styled(Card)`
   position:relative;
   margin: 10px;
-  max-width: 400px;
+  width: 400px;
   text-align: center;
   padding: 7px;
   border-radius: 5px;
@@ -60,6 +60,8 @@ export const StyledLink = styled(Link)`
   border: 1px solid rgb(110 45 53);
   color: rgb(110 45 53);
   text-decoration: none;
+  position: absolute;
+    right: 10px;
   padding: 3px 5px;
   min-width: 65px;
   border-radius: 5px;
@@ -72,5 +74,4 @@ export const StyledLink = styled(Link)`
 export const StyledWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-around;
 `;

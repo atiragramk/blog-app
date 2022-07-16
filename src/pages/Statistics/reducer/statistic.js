@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { bookListStatisticFetch } from "../thunk";
+import { bookListStatisticFetch } from "../thunk/statistic";
 
 const initialState = {
   data: [],

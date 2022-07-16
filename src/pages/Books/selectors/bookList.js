@@ -17,16 +17,3 @@ export const bookListErrorSelector = createSelector(
   (bookList) => bookList.error
 );
 
-export const bookListPaginationSelector = createSelector(
-  bookListStateSelector,
-  (bookList) => {
-    return {
-      data: bookList.data,
-      page: bookList.page,
-      offset:bookList.offset,
-      itemsPerPage:bookList.itemsPerPage,
-      pageCount: Math.ceil(bookList.data.length / bookList.itemsPerPage),
-      endOffset: bookList.offset + bookList.itemsPerPage,
-    }
-  }
-)

@@ -5,7 +5,7 @@ import { ErrorMessage } from "../../components/ErrorMessage";
 import { StyledContainer, StyledSpinner } from "./styled";
 import { ErrorBoundary } from "../../components/ErrorBoundary";
 import * as selectors from "./selectors/bookItem";
-import { bookListStatisticFetch } from "./thunk"
+import { bookListStatisticFetch } from "./thunk/statistic"
 import moment from "moment";
 
 export default function Statistics() {

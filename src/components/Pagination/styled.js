@@ -7,6 +7,7 @@ export const StyledPagination = styled(Pagination)`
     justify-content: center;
     margin: 20px 0;
     text-align: center;
+    padding-bottom: 20px;
   }
 `;
 

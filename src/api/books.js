@@ -23,3 +23,19 @@ export const deleteBook = async (id) => {
     return Promise.reject(error);
   }
 }
+
+export const createBook = async (data) => {
+  try {
+    return await client.post("/books", {...data})
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
+export const updateBook = async (data, id) => {
+  try {
+    return await client.patch(`/books/${id}`, {...data})
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
