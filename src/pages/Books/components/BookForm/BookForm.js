@@ -3,11 +3,6 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Input, Typography } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { createModalSelector, updateModalSelector } from "../Modal/selectors/modal";
-import { createModalOpen } from "../Modal/reducer/createModal";
-import { updateModalOpen } from "../Modal/reducer/updateModal";
-import { bookItemCreate, bookItemUpdate} from "../Modal/thunk/modal";
 
 const CreateBookSchema = yup.object().shape({
   title: yup.string().required("This field is required"),
@@ -15,51 +10,38 @@ const CreateBookSchema = yup.object().shape({
   pageCount: yup
     .number()
     .required("This field is required")
-    .positive("Value must be a positive number.")
-    .integer("Value must be an integer"),
+    .integer("Value must be an integer")
+    .positive("Value must be a positive number."),
 });
 
 export const BookForm = (props) => {
-
-
-  const { formId, data } = props;
+  const { mode, data, name, onSave } = props;
   const { Text, Title } = Typography;
   const { TextArea } = Input;
 
-  const dispatch = useDispatch();
-  const { open } = useSelector(createModalSelector);
-  const {updateOpen} = useSelector(updateModalSelector);
-
   const {
     control,
-    reset,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(CreateBookSchema)
+    resolver: yupResolver(CreateBookSchema),
   });
 
   const onSubmit = async (values) => {
     try {
-      if (formId === "create") {
-        await dispatch(bookItemCreate(values));
-        dispatch(createModalOpen(open));
-        reset();
+      if (!data) {
+        onSave(values);
       } else {
-        await dispatch(bookItemUpdate({
-          data: values,
-          id: data._id
-        }))
-        dispatch(updateModalOpen(updateOpen))
+        onSave({ ...values, id: data._id });
       }
     } catch (error) {}
   };
 
   return (
     <>
-      {formId === "create" && <Title level={3}>Create Book</Title>}
-      {formId === "update" && <Title level={3}>Update Book</Title>}
-      <form onSubmit={handleSubmit(onSubmit)} id={formId}>
+      {mode === "create" && <Title level={3}>Create Book</Title>}
+      {mode === "update" && <Title level={3}>Update Book</Title>}
+      <form onSubmit={handleSubmit(onSubmit)} id={name}>
         <label>Book Title</label>
         <Controller
           render={({ field }) => <Input {...field} />}
