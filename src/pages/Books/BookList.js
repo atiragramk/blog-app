@@ -3,7 +3,7 @@ import { Container } from "reactstrap";
 import { BookCard } from "./components/BookCard";
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { ErrorBoundary } from "../../components/ErrorBoundary";
-import { StyledButton, StyledSpinner, StyledContainer } from "./styled";
+import { StyledButton, StyledContainer } from "./styled";
 import { useDispatch, useSelector } from "react-redux";
 import * as selectors from "./selectors/bookList";
 import { BookPagination } from "../../components/Pagination";
@@ -24,6 +24,7 @@ import {
   bookUpdateItemIdSetAction,
 } from "./reducer/bookList";
 import { DeleteBookModal } from "./components/DeleteBookModal";
+import { PreLoader } from "../../components/PreLoader";
 
 const BookList = () => {
   const loading = useSelector(selectors.bookListLoadingSelector);
@@ -42,7 +43,7 @@ const BookList = () => {
 
   useEffect(() => {
     dispatch(bookListFetch());
-  }, [dispatch]);
+  }, [dispatch, page]);
 
   const handlePagination = (index) => {
     const newOffset = (index * itemsPerPage) % data.length;
@@ -68,35 +69,48 @@ const BookList = () => {
   const handleEditModalOpen = useCallback((id) => {
     dispatch(bookUpdateItemIdSetAction({ id }));
     dispatch(modalOpenToggleAction({ name: "Update" }));
+    // eslint-disable-next-line
   }, []);
 
   const handleEditModalClose = useCallback(() => {
     dispatch(modalOpenToggleAction({ name: "Update" }));
+    // eslint-disable-next-line
   }, []);
 
   const handleDeleteModalOpen = useCallback((item) => {
     dispatch(bookDeleteItemDataSetAction(item));
     dispatch(modalOpenToggleAction({ name: "Delete" }));
+    // eslint-disable-next-line
   }, []);
 
   return (
     <ErrorBoundary>
       <Container>
-        {loading && !error && <StyledSpinner />}
         <StyledButton onClick={handleCreateModalOpenToggle} color="light">
           Create book
         </StyledButton>
-        {!loading && !error && data.length > 0 && (
+        {
           <>
             <StyledContainer>
-              {bookList.map((book) => (
-                <BookCard
-                  key={book._id}
-                  data={book}
-                  onEdit={handleEditModalOpen}
-                  onDelete={handleDeleteModalOpen}
-                />
-              ))}
+              {loading && !error && (
+                <>
+                  {[...Array(bookList.length).keys()].map((item) => (
+                    <PreLoader key={item} />
+                  ))}
+                </>
+              )}
+              {!loading && !error && data.length > 0 && (
+                <>
+                  {bookList.map((book) => (
+                    <BookCard
+                      key={book._id}
+                      data={book}
+                      onEdit={handleEditModalOpen}
+                      onDelete={handleDeleteModalOpen}
+                    />
+                  ))}
+                </>
+              )}
             </StyledContainer>
             <BookPagination
               currentPage={page}
@@ -104,7 +118,7 @@ const BookList = () => {
               pageCount={pageCount}
             />
           </>
-        )}
+        }
         {open && name === "Create" && (
           <CreateBookModal
             onSave={handleCreateBook}

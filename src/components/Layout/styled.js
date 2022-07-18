@@ -19,19 +19,19 @@ export const StyledText = styled.h4`
 `;
 
 export const StyledImage = styled.img`
-  height: 100px;
+  height: 80px;
   margin-right: 20px;
 `;
 
 export const StyledMenu = styled(Nav)`
   justify-content: space-between;
-  width: 300px;
+  width: 260px;
 `;
 
 export const StyledNavLink = styled(NavLink)`
   font-size: 18px;
   text-decoration: none;
-  padding: 4px 15px;
+  padding: 3px 10px;
   color: rgb(110 45 53);
   &:hover {
     color: rgb(151 151 151);
@@ -40,7 +40,7 @@ export const StyledNavLink = styled(NavLink)`
   &.active {
     background-color: rgb(110 45 53);
     color: white;
-    border-radius: 5px;
+    border-radius: 2px;
     pointer-events: none;
   }
 `;

@@ -4,6 +4,7 @@ import { Modal } from "../../../../components/Modal";
 import { bookListUpdateStateSelector } from "../../selectors/bookList";
 import { bookItemUpdateDataFetch } from "../../thunk/bookList";
 import { BookForm } from "../BookForm/BookForm";
+import { StyledSpin } from "../DeleteBookModal/styled";
 
 export const UpdateBookModal = ({ onSave, onCancel }) => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ export const UpdateBookModal = ({ onSave, onCancel }) => {
 
   return (
     <Modal form="edit" onCancel={onCancel} formName="edit">
-      {loading && <div>Loading</div>}
+      <StyledSpin spinning={loading} />
       {!loading && data && (
         <BookForm mode="edit" onSave={onSave} data={data} name="edit" />
       )}

@@ -19,6 +19,7 @@ import {
 } from "../reducer/bookList";
 
 import { modalOpenToggleAction } from "../../../store/modal/reducer/modal";
+import { toast } from "react-toastify";
 
 const BOOK_LIST_FETCH_THUNK_TYPE = "BOOK_LIST_FETCH_THUNK_TYPE";
 
@@ -44,8 +45,10 @@ export const bookItemCreate = createAsyncThunk(
       dispatch(bookCreateSuccessAction());
       dispatch(modalOpenToggleAction());
       await dispatch(bookListFetch());
+      toast.success("Book was created");
     } catch (error) {
       dispatch(bookCreateErrorAction(error.data));
+      toast.error("Something went wrong");
     }
   }
 );
@@ -75,8 +78,10 @@ export const bookItemUpdate = createAsyncThunk(
       dispatch(bookUpdateSuccessAction());
       dispatch(modalOpenToggleAction());
       await dispatch(bookListFetch());
+      toast.success("Book was updated");
     } catch (error) {
       dispatch(bookUpdateErrorAction(error.data));
+      toast.error("Something went wrong");
     }
   }
 );
@@ -92,8 +97,10 @@ export const bookItemDelete = createAsyncThunk(
       dispatch(bookDeleteSuccessAction());
       dispatch(modalOpenToggleAction());
       await dispatch(bookListFetch());
+      toast.success("Book was deleted");
     } catch (error) {
       dispatch(bookDeleteErrorAction(error.data));
+      toast.error("Something went wrong");
     }
   }
 );

@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { Button, Spinner, Container } from "reactstrap";
+import { Spinner, Container } from "reactstrap";
 import ReactPaginate from "react-paginate";
+import Button from "antd/lib/button";
 
 export const StyledButton = styled(Button)`
   display: block;

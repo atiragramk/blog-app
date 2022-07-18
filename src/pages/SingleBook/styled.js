@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Spinner } from "reactstrap";
 import { Link } from "react-router-dom";
+import Spin from "antd/lib/spin";
 
 export const StyledWrapper = styled.div`
   display: flex;
@@ -28,15 +28,20 @@ export const StyledLink = styled(Link)`
   text-decoration: none;
   padding: 7px 12px;
   min-width: 85px;
-  border-radius: 5px;
+  border-radius: 2px;
   &:hover {
     color: white;
     background-color: rgb(110 45 53);
   }
 `;
 
-export const StyledSpinner = styled(Spinner)`
-  display: flex;
-  margin: 0 auto;
-  color: rgb(110 45 53);
+export const StyledSpinner = styled(Spin)`
+  display: block;
+  .ant-spin-dot {
+    display: flex;
+    margin: 10px auto;
+  }
+  .ant-spin-dot-item {
+    background-color: rgb(110 45 53);
+  }
 `;

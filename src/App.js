@@ -2,6 +2,7 @@ import { Layout } from "./components/Layout";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Container } from "reactstrap";
 import { lazy } from "react";
+import { ToastContainer } from "react-toastify";
 
 const HomePage = lazy(() => import("./pages/Home"));
 const BooksPage = lazy(() => import("./pages/Books"));
@@ -21,6 +22,7 @@ function App() {
           </Route>
         </Routes>
       </Router>
+      <ToastContainer position="top-center" autoClose={3000} />
     </Container>
   );
 }

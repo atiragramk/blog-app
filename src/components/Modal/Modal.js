@@ -1,5 +1,5 @@
 import { Button, Modal as AntdModal } from "antd";
-
+import { StyledButton } from "./styled";
 export const Modal = ({ children, onCancel, formName, loading, onSave }) => {
   return (
     <AntdModal
@@ -7,12 +7,13 @@ export const Modal = ({ children, onCancel, formName, loading, onSave }) => {
       onCancel={onCancel}
       confirmLoading={loading}
       footer={[
-        <Button key="cancel" onClick={onCancel}>
+        <StyledButton key="cancel" onClick={onCancel}>
           Cancel
-        </Button>,
+        </StyledButton>,
         <Button
           key="submit"
           type="primary"
+          danger
           loading={loading}
           htmlType="submit"
           form={formName}

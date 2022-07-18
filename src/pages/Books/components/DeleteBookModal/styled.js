@@ -1,13 +1,7 @@
-import { Container } from "reactstrap";
 import styled from "styled-components";
 import Spin from "antd/lib/spin";
 
-export const StyledContainer = styled(Container)`
-  display: flex;
-  justify-content: center;
-`;
-
-export const StyledSpinner = styled(Spin)`
+export const StyledSpin = styled(Spin)`
   display: block;
   .ant-spin-dot {
     display: flex;
