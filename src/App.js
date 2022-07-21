@@ -5,8 +5,8 @@ import { lazy } from "react";
 import { ToastContainer } from "react-toastify";
 
 const HomePage = lazy(() => import("./pages/Home"));
-const BooksPage = lazy(() => import("./pages/Books"));
-const SingleBookPage = lazy(() => import("./pages/SingleBook"));
+const BooksPage = lazy(() => import("./pages/BookList"));
+const SingleBookPage = lazy(() => import("./pages/BookItem"));
 const Statistics = lazy(() => import("./pages/Statistics"));
 
 function App() {

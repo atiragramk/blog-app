@@ -1,31 +1,36 @@
 import { useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Container } from "reactstrap";
 import { BookCard } from "./components/BookCard";
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { ErrorBoundary } from "../../components/ErrorBoundary";
 import { StyledButton, StyledContainer } from "./styled";
-import { useDispatch, useSelector } from "react-redux";
 import * as selectors from "./selectors/bookList";
 import { BookPagination } from "../../components/Pagination";
-import {
-  bookItemCreate,
-  bookItemDelete,
-  bookItemUpdate,
-  bookListFetch,
-} from "./thunk/bookList";
+import { PreLoader } from "../../components/PreLoader";
 import { bookPaginationSet } from "../../components/Pagination/reducer/pagination";
 import { bookListPaginationSelector } from "../../components/Pagination/selectors/pagination";
 import { modalStateSelector } from "../../store/modal/selectors/modal";
 import { modalOpenToggleAction } from "../../store/modal/reducer/modal";
 import { CreateBookModal } from "./components/CreateBookModal";
 import { UpdateBookModal } from "./components/UpdateBookModal";
+import { DeleteBookModal } from "./components/DeleteBookModal";
 import {
   bookDeleteItemDataSetAction,
   bookUpdateItemIdSetAction,
   bookListResetAction,
 } from "./reducer/bookList";
-import { DeleteBookModal } from "./components/DeleteBookModal";
-import { PreLoader } from "../../components/PreLoader";
+import {
+  bookItemCreate,
+  bookItemDelete,
+  bookItemUpdate,
+  bookListFetch,
+} from "./thunk/bookList";
+import {
+  MODAL_CREATE_NAME,
+  MODAL_UPDATE_NAME,
+  MODAL_DELETE_NAME,
+} from "./constants";
 
 const BookList = () => {
   const loading = useSelector(selectors.bookListLoadingSelector);
@@ -65,23 +70,23 @@ const BookList = () => {
   };
 
   const handleCreateModalOpenToggle = () => {
-    dispatch(modalOpenToggleAction({ name: "Create" }));
+    dispatch(modalOpenToggleAction({ name: MODAL_CREATE_NAME }));
   };
 
   const handleEditModalOpen = useCallback((id) => {
     dispatch(bookUpdateItemIdSetAction({ id }));
-    dispatch(modalOpenToggleAction({ name: "Update" }));
+    dispatch(modalOpenToggleAction({ name: MODAL_UPDATE_NAME }));
     // eslint-disable-next-line
   }, []);
 
   const handleEditModalClose = useCallback(() => {
-    dispatch(modalOpenToggleAction({ name: "Update" }));
+    dispatch(modalOpenToggleAction({ name: MODAL_UPDATE_NAME }));
     // eslint-disable-next-line
   }, []);
 
   const handleDeleteModalOpen = useCallback((item) => {
     dispatch(bookDeleteItemDataSetAction(item));
-    dispatch(modalOpenToggleAction({ name: "Delete" }));
+    dispatch(modalOpenToggleAction({ name: MODAL_DELETE_NAME }));
     // eslint-disable-next-line
   }, []);
 
@@ -125,19 +130,19 @@ const BookList = () => {
             )}
           </>
         }
-        {open && name === "Create" && (
+        {open && name === MODAL_CREATE_NAME && (
           <CreateBookModal
             onSave={handleCreateBook}
             onCancel={handleCreateModalOpenToggle}
           />
         )}
-        {open && name === "Update" && (
+        {open && name === MODAL_UPDATE_NAME && (
           <UpdateBookModal
             onSave={handleUpdateBook}
             onCancel={handleEditModalClose}
           />
         )}
-        {open && name === "Delete" && (
+        {open && name === MODAL_DELETE_NAME && (
           <DeleteBookModal
             onSave={handleDeleteBook}
             onCancel={handleDeleteModalOpen}

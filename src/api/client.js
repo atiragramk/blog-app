@@ -1,11 +1,12 @@
 import axios from "axios";
 
-export const client = axios.create({
-    // baseURL: "https://fakerestapi.azurewebsites.net/api/v1"
-    baseURL: "http://localhost:80/api/v1"
+const { REACT_APP_API } = process.env;
 
+export const client = axios.create({
+  baseURL: REACT_APP_API,
 });
 
 client.interceptors.response.use(
-    (response) => response.data.data, 
-    (error) => Promise.reject(error));
+  (response) => response.data.data,
+  (error) => Promise.reject(error)
+);
