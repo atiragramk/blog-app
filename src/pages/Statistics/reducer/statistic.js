@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { bookListStatisticFetch } from "../thunk/statistic";
+import { bookListStatisticsReset } from "../actions/statistics";
 
-const initialState = {
+export const initialState = {
   data: [],
   error: null,
   loading: true,
@@ -12,7 +13,9 @@ const name = "BOOK_STATISTIC";
 const bookListStatisticSlice = createSlice({
   name: name,
   initialState,
-  reducers: {},
+  reducers: {
+    bookListStatisticsReset,
+  },
   extraReducers: (builder) => {
     builder
       .addCase(bookListStatisticFetch.pending, (state) => {
@@ -30,5 +33,7 @@ const bookListStatisticSlice = createSlice({
   },
 });
 
+export const { bookListStatisticsReset: bookListStatisticsResetAction } =
+  bookListStatisticSlice.actions;
 
 export default bookListStatisticSlice.reducer;

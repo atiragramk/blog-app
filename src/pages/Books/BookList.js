@@ -22,6 +22,7 @@ import { UpdateBookModal } from "./components/UpdateBookModal";
 import {
   bookDeleteItemDataSetAction,
   bookUpdateItemIdSetAction,
+  bookListResetAction,
 } from "./reducer/bookList";
 import { DeleteBookModal } from "./components/DeleteBookModal";
 import { PreLoader } from "../../components/PreLoader";
@@ -43,6 +44,7 @@ const BookList = () => {
 
   useEffect(() => {
     dispatch(bookListFetch());
+    return () => dispatch(bookListResetAction());
   }, [dispatch, page]);
 
   const handlePagination = (index) => {
@@ -94,9 +96,11 @@ const BookList = () => {
             <StyledContainer>
               {loading && !error && (
                 <>
-                  {[...Array(bookList.length).keys()].map((item) => (
-                    <PreLoader key={item} />
-                  ))}
+                  {[...Array(bookList.length || itemsPerPage).keys()].map(
+                    (item) => (
+                      <PreLoader key={item} />
+                    )
+                  )}
                 </>
               )}
               {!loading && !error && data.length > 0 && (
@@ -112,11 +116,13 @@ const BookList = () => {
                 </>
               )}
             </StyledContainer>
-            <BookPagination
-              currentPage={page}
-              onPagination={handlePagination}
-              pageCount={pageCount}
-            />
+            {!loading && !error && data.length > 0 && (
+              <BookPagination
+                currentPage={page}
+                onPagination={handlePagination}
+                pageCount={pageCount}
+              />
+            )}
           </>
         }
         {open && name === "Create" && (

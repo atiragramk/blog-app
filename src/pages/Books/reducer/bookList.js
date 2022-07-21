@@ -13,9 +13,10 @@ import {
   bookDeleteInProgress,
   bookDeleteSuccess,
   bookDeleteError,
+  bookListReset,
 } from "../actions/bookList";
 
-const initialState = {
+export const initialState = {
   loading: true,
   data: [],
   error: null,
@@ -23,6 +24,7 @@ const initialState = {
     loading: true,
     data: {},
     error: null,
+    fetchData: {},
   },
   createState: {
     loading: false,
@@ -53,6 +55,7 @@ const bookListSlice = createSlice({
     bookDeleteInProgress,
     bookDeleteSuccess,
     bookDeleteError,
+    bookListReset,
   },
   extraReducers: (builder) => {
     builder
@@ -95,6 +98,7 @@ export const {
   bookDeleteInProgress: bookDeleteInProgressAction,
   bookDeleteSuccess: bookDeleteSuccessAction,
   bookDeleteError: bookDeleteErrorAction,
+  bookListReset: bookListResetAction,
 } = bookListSlice.actions;
 
 export default bookListSlice.reducer;

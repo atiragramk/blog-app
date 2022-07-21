@@ -8,6 +8,6 @@ export const StyledSpin = styled(Spin)`
     margin: 10px auto;
   }
   .ant-spin-dot-item {
-    background-color: rgb(110 45 53);
+    background-color: rgb(255 186 89);
   }
 `;

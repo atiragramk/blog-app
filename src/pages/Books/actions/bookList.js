@@ -1,3 +1,5 @@
+import { initialState } from "../reducer/bookList";
+
 export const bookFetchStart = () => {};
 
 export const bookFetchInProgress = (state) => {
@@ -58,4 +60,8 @@ export const bookDeleteSuccess = (state) => {
 export const bookDeleteError = (state) => {
   state.deleteState.loading = false;
   state.deleteState.error = true;
+};
+
+export const bookListReset = (state) => {
+  return (state = initialState);
 };

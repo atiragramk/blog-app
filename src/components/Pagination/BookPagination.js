@@ -1,9 +1,9 @@
 import { PaginationItem } from "reactstrap";
 import { StyledPagination, StyledPaginationLink } from "./styled";
+import PropTypes from "prop-types";
 
 export const BookPagination = (props) => {
   const { currentPage, pageCount, onPagination } = props;
-
 
   return (
     <StyledPagination>
@@ -17,10 +17,11 @@ export const BookPagination = (props) => {
 
       {[...Array(pageCount).keys()].map((page, index) => (
         <PaginationItem key={page}>
-          <StyledPaginationLink 
-          tag="button"
-          active={index === currentPage ? 'active' : null}
-          onClick={() => onPagination(index)}>
+          <StyledPaginationLink
+            tag="button"
+            active={index === currentPage ? "active" : null}
+            onClick={() => onPagination(index)}
+          >
             {index + 1}
           </StyledPaginationLink>
         </PaginationItem>
@@ -35,4 +36,10 @@ export const BookPagination = (props) => {
       </PaginationItem>
     </StyledPagination>
   );
+};
+
+BookPagination.propTypes = {
+  currentPage: PropTypes.number.isRequired,
+  pageCount: PropTypes.number.isRequired,
+  onPagination: PropTypes.func.isRequired,
 };

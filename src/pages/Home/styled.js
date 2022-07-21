@@ -3,12 +3,9 @@ import styled from "styled-components";
 
 export const StyledContainer = styled(Container)`
   display: flex;
+  padding: 0px;
 `;
 
-export const StyledImage = styled.img`
-  height: 500px;
-  border-radius: 10px;
-`;
 export const StyledWrapper = styled.div`
   padding: 10px;
 `;

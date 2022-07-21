@@ -1,6 +1,8 @@
 import { CardBody } from "reactstrap";
 import moment from "moment";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import PropTypes from "prop-types";
+
 import {
   StyledCard,
   StyledLink,
@@ -20,10 +22,10 @@ export const BookCard = ({ data, onEdit, onDelete }) => {
   return (
     <StyledCard size="small">
       <CardBody>
-        <StyledButton onClick={() => onEdit(id)} color="ligth" edit="edit">
+        <StyledButton onClick={() => onEdit(id)} type="default" edit="edit">
           <EditOutlined />
         </StyledButton>
-        <StyledButton onClick={() => onDelete(data)} color="ligth">
+        <StyledButton onClick={() => onDelete(data)} type="default">
           <DeleteOutlined />
         </StyledButton>
 
@@ -36,4 +38,10 @@ export const BookCard = ({ data, onEdit, onDelete }) => {
       </CardBody>
     </StyledCard>
   );
+};
+
+BookCard.propTypes = {
+  data: PropTypes.object.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };

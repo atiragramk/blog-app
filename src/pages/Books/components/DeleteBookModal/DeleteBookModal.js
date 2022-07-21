@@ -3,6 +3,7 @@ import { Modal } from "../../../../components/Modal";
 import { bookListDeleteStateSelector } from "../../selectors/bookList";
 import { StyledSpin } from "./styled";
 import { Space, Typography } from "antd";
+import PropTypes from "prop-types";
 
 export const DeleteBookModal = ({ onSave, onCancel }) => {
   const { loading, data } = useSelector(bookListDeleteStateSelector);
@@ -10,7 +11,7 @@ export const DeleteBookModal = ({ onSave, onCancel }) => {
   const { Title, Text } = Typography;
 
   return (
-    <Modal onCancel={onCancel} onSave={() => onSave(data)} formName="edit">
+    <Modal onCancel={onCancel} onSave={() => onSave(data)}>
       <StyledSpin spinning={loading} />
       {!loading && data && (
         <Space direction="vertical">
@@ -29,4 +30,9 @@ export const DeleteBookModal = ({ onSave, onCancel }) => {
       )}
     </Modal>
   );
+};
+
+DeleteBookModal.propTypes = {
+  onSave: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
 };

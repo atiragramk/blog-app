@@ -5,27 +5,27 @@ import Button from "antd/lib/button";
 
 export const StyledButton = styled(Button)`
   display: block;
-  margin: 10px auto;
-  background-color: white;
-  color: rgb(110 45 53);
-  border-color: rgb(110 45 53);
-  padding: 5px 10px;
+  margin: 20px auto;
+  background-color: rgb(255 186 89);
+  color: rgb(63 65 69);
+  border-color: rgb(255 186 89);
   &:hover {
-    background-color: rgb(110 45 53);
-    border-color: rgb(110 45 53);
-    color: #fff;
+    background-color: transparent;
+    border-color: rgb(255 186 89);
+    color: rgb(255 186 89);
   }
   &:active:focus {
-    background-color: rgb(110 45 53);
-    border-color: rgb(110 45 53);
+    background-color: rgb(255 186 89);
+    border-color: rgb(255 186 89);
   }
   &:active {
-    background-color: rgb(110 45 53);
-    border-color: rgb(110 45 53);
+    background-color: rgb(255 186 89);
+    border-color: rgb(255 186 89);
+    color: rgb(63 65 69);
   }
   &:focus {
-    box-shadow: 0 0 0 0.25rem rgb(110 45 53 / 50%);
-    color: rgb(110 45 53);
+    box-shadow: 0 0 0 0.25rem rgb(255 186 89 / 50%);
+    color: rgb(63 65 69);
   }
 `;
 
@@ -37,7 +37,7 @@ export const StyledSpinner = styled(Spinner)`
 
 export const StyledContainer = styled(Container)`
   display: flex;
-  padding-right: 0;
+  padding: 0;
   flex-direction: row;
   flex-wrap: wrap;
 `;

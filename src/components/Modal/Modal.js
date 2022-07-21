@@ -1,6 +1,15 @@
 import { Button, Modal as AntdModal } from "antd";
 import { StyledButton } from "./styled";
-export const Modal = ({ children, onCancel, formName, loading, onSave }) => {
+import PropTypes from "prop-types";
+
+export const Modal = ({
+  children,
+  onCancel,
+  formName,
+  loading,
+  onSave,
+  disable,
+}) => {
   return (
     <AntdModal
       visible={true}
@@ -13,7 +22,8 @@ export const Modal = ({ children, onCancel, formName, loading, onSave }) => {
         <Button
           key="submit"
           type="primary"
-          danger
+          disabled={disable}
+          danger={!formName}
           loading={loading}
           htmlType="submit"
           form={formName}
@@ -30,4 +40,13 @@ export const Modal = ({ children, onCancel, formName, loading, onSave }) => {
 
 Modal.defaultProps = {
   onSave: () => {},
+};
+
+Modal.propTypes = {
+  children: PropTypes.node.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  formName: PropTypes.string,
+  loading: PropTypes.bool,
+  onSave: PropTypes.func,
+  disable: PropTypes.bool,
 };

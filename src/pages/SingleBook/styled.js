@@ -11,27 +11,31 @@ export const StyledWrapper = styled.div`
 export const StyledHeader = styled.h3`
   font-weight: bold;
   margin: 0px auto;
+  color: rgb(69 79 99);
 `;
 
 export const StyledText = styled.p`
   margin: 20px 0;
   font-size: 16px;
+  color: rgb(69 79 99);
 `;
 
 export const StyledDate = styled.span`
   font-style: italic;
+  color: rgb(69 79 99);
 `;
 
 export const StyledLink = styled(Link)`
-  border: 1px solid rgb(110 45 53);
-  color: rgb(110 45 53);
+  border: 1px solid rgb(255 186 89);
+  color: rgb(69 79 99);
   text-decoration: none;
   padding: 7px 12px;
   min-width: 85px;
   border-radius: 2px;
+  margin-right: 20px;
   &:hover {
-    color: white;
-    background-color: rgb(110 45 53);
+    color: #fff;
+    background-color: rgb(255 186 89);
   }
 `;
 

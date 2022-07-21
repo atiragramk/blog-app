@@ -3,6 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Input, Typography } from "antd";
+import PropTypes from "prop-types";
 
 const CreateBookSchema = yup.object().shape({
   title: yup.string().required("This field is required"),
@@ -40,7 +41,7 @@ export const BookForm = (props) => {
   return (
     <>
       {mode === "create" && <Title level={3}>Create Book</Title>}
-      {mode === "update" && <Title level={3}>Update Book</Title>}
+      {mode === "edit" && <Title level={3}>Update Book</Title>}
       <form onSubmit={handleSubmit(onSubmit)} id={name}>
         <label>Book Title</label>
         <Controller
@@ -84,4 +85,11 @@ export const BookForm = (props) => {
       </form>
     </>
   );
+};
+
+BookForm.propTypes = {
+  mode: PropTypes.string.isRequired,
+  data: PropTypes.object,
+  name: PropTypes.string.isRequired,
+  onSave: PropTypes.func.isRequired,
 };

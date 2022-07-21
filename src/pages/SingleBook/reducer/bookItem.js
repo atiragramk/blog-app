@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { bookItemFetch } from "../thunk/bookItem";
+import { bookItemReset } from "../actions/bookItem";
 
-const initialState = {
+export const initialState = {
   data: {},
   error: null,
   loading: true,
@@ -12,7 +13,9 @@ const name = "BOOK_ITEM";
 const bookItemSlice = createSlice({
   name,
   initialState,
-  reducers: {},
+  reducers: {
+    bookItemReset,
+  },
   extraReducers: (builder) => {
     builder
       .addCase(bookItemFetch.pending, (state) => {
@@ -29,5 +32,6 @@ const bookItemSlice = createSlice({
       });
   },
 });
+export const { bookItemReset: bookItemResetAction } = bookItemSlice.actions;
 
 export default bookItemSlice.reducer;

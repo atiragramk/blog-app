@@ -13,16 +13,16 @@ export const StyledPagination = styled(Pagination)`
 
 export const StyledPaginationLink = styled(PaginationLink)`
   min-width: 42px;
-  color: ${({ active }) => (active ? "rgb(255 255 255)" : "rgb(110 45 53)")};
+  color: ${({ active }) => (active ? "rgb(69 79 99)" : "rgb(69 79 99)")};
   background-color: ${({ active }) =>
-    active ? "rgb(110 45 53)" : "rgb(255 255 255)"};
+    active ? "rgb(255 186 89)" : "rgb(255 255 255)"};
   &:hover {
-    background-color: rgb(122 122 122 / 60%);
-    color: rgb(255 255 255);
+    background-color: rgb(69 79 89 / 20%);
+    color: rgb(255 186 89);
   }
   &:focus {
-    color: rgb(255 255 255);
-    background-color: rgb(110 45 53);
+    color: rgb(69 79 89);
+    background-color: rgb(255 186 89);
     box-shadow: none;
   }
 `;

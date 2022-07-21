@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { ErrorBoundary } from "../../components/ErrorBoundary";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
 import { Container } from "reactstrap";
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { bookItemFetch } from "./thunk/bookItem";
-import * as selectors from "./selectors/bookItem"
+import * as selectors from "./selectors/bookItem";
 import {
   StyledHeader,
   StyledWrapper,
@@ -15,18 +15,20 @@ import {
   StyledSpinner,
 } from "./styled";
 import moment from "moment";
+import { bookItemResetAction } from "./reducer/bookItem";
 
 export default function BookItem() {
   const { routeId } = useParams();
-  const loading = useSelector(selectors.bookItemLoadingSelector)
-  const error = useSelector(selectors.bookItemErrorSelector)
+  const loading = useSelector(selectors.bookItemLoadingSelector);
+  const error = useSelector(selectors.bookItemErrorSelector);
   const bookData = useSelector(selectors.bookItemDataSelector);
 
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(bookItemFetch(routeId));
-  }, [dispatch, routeId])
+    return () => dispatch(bookItemResetAction());
+  }, [dispatch, routeId]);
 
   return (
     <ErrorBoundary>
@@ -37,11 +39,12 @@ export default function BookItem() {
             <StyledWrapper>
               <StyledHeader>{bookData.title}</StyledHeader>
               <StyledText>{bookData.description}</StyledText>
-              <StyledDate>{moment(bookData.publishDate).format("DD/MM/YYYY")}</StyledDate>
+              <StyledDate>
+                {moment(bookData.publishDate).format("DD/MM/YYYY")}
+              </StyledDate>
             </StyledWrapper>
-            <StyledLink to="/books">
-              Back to list
-            </StyledLink>
+            <StyledLink to="/books">Back to list</StyledLink>
+            <StyledLink to="/statistics">Back to statistics</StyledLink>
           </>
         )}
         {error && !loading && <ErrorMessage />}

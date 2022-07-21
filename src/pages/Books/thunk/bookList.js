@@ -16,6 +16,7 @@ import {
   bookDeleteSuccessAction,
   bookDeleteErrorAction,
   bookDeleteInProgressAction,
+  bookListResetAction,
 } from "../reducer/bookList";
 
 import { modalOpenToggleAction } from "../../../store/modal/reducer/modal";
@@ -44,11 +45,11 @@ export const bookItemCreate = createAsyncThunk(
       await createBook(data);
       dispatch(bookCreateSuccessAction());
       dispatch(modalOpenToggleAction());
-      await dispatch(bookListFetch());
       toast.success("Book was created");
+      await dispatch(bookListFetch());
     } catch (error) {
-      dispatch(bookCreateErrorAction(error.data));
       toast.error("Something went wrong");
+      dispatch(bookCreateErrorAction(error.data));
     }
   }
 );
@@ -62,7 +63,8 @@ export const bookItemUpdateDataFetch = createAsyncThunk(
     try {
       return await getBook(data.id);
     } catch (error) {
-      dispatch(bookCreateErrorAction(error.data));
+      toast.error("Something went wrong");
+      dispatch(bookUpdateErrorAction(error.data));
     }
   }
 );
@@ -77,11 +79,12 @@ export const bookItemUpdate = createAsyncThunk(
       await updateBook(data, data.id);
       dispatch(bookUpdateSuccessAction());
       dispatch(modalOpenToggleAction());
-      await dispatch(bookListFetch());
       toast.success("Book was updated");
+      dispatch(bookListResetAction());
+      await dispatch(bookListFetch());
     } catch (error) {
-      dispatch(bookUpdateErrorAction(error.data));
       toast.error("Something went wrong");
+      dispatch(bookUpdateErrorAction(error.data));
     }
   }
 );
@@ -96,11 +99,12 @@ export const bookItemDelete = createAsyncThunk(
       await deleteBook(data._id);
       dispatch(bookDeleteSuccessAction());
       dispatch(modalOpenToggleAction());
-      await dispatch(bookListFetch());
       toast.success("Book was deleted");
+      dispatch(bookListResetAction());
+      await dispatch(bookListFetch());
     } catch (error) {
-      dispatch(bookDeleteErrorAction(error.data));
       toast.error("Something went wrong");
+      dispatch(bookDeleteErrorAction(error.data));
     }
   }
 );
