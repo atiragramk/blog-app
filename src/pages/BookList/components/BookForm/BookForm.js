@@ -4,12 +4,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Input, Typography } from "antd";
 import PropTypes from "prop-types";
+import { bookItemDataPropType } from "../../../../propTypes/bookItemPropType";
 
-const CreateBookSchema = yup.object().shape({
+const createBookSchema = yup.object().shape({
   title: yup.string().required("This field is required"),
   description: yup.string().required("This field is required"),
   pageCount: yup
     .number()
+    .typeError("Value must be a number")
     .required("This field is required")
     .integer("Value must be an integer")
     .positive("Value must be a positive number."),
@@ -19,13 +21,14 @@ export const BookForm = (props) => {
   const { mode, data, name, onSave } = props;
   const { Text, Title } = Typography;
   const { TextArea } = Input;
+  console.log(data);
 
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(CreateBookSchema),
+    resolver: yupResolver(createBookSchema),
   });
 
   const onSubmit = async (values) => {
@@ -87,9 +90,13 @@ export const BookForm = (props) => {
   );
 };
 
+BookForm.defaultProps = {
+  data: null,
+};
+
 BookForm.propTypes = {
   mode: PropTypes.string.isRequired,
-  data: PropTypes.object,
+  data: bookItemDataPropType,
   name: PropTypes.string.isRequired,
   onSave: PropTypes.func.isRequired,
 };

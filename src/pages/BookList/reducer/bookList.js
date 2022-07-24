@@ -14,6 +14,8 @@ import {
   bookDeleteSuccess,
   bookDeleteError,
   bookListReset,
+  bookListUpdateReset,
+  bookListDeleteReset,
 } from "../actions/bookList";
 
 export const initialState = {
@@ -56,6 +58,8 @@ const bookListSlice = createSlice({
     bookDeleteSuccess,
     bookDeleteError,
     bookListReset,
+    bookListUpdateReset,
+    bookListDeleteReset,
   },
   extraReducers: (builder) => {
     builder
@@ -99,6 +103,8 @@ export const {
   bookDeleteSuccess: bookDeleteSuccessAction,
   bookDeleteError: bookDeleteErrorAction,
   bookListReset: bookListResetAction,
+  bookListUpdateReset: bookListUpdateResetAction,
+  bookListDeleteReset: bookListDeleteResetAction,
 } = bookListSlice.actions;
 
 export default bookListSlice.reducer;

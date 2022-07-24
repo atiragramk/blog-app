@@ -4,7 +4,7 @@ import { Container } from "reactstrap";
 import { BookCard } from "./components/BookCard";
 import { ErrorMessage } from "../../components/ErrorMessage";
 import { ErrorBoundary } from "../../components/ErrorBoundary";
-import { StyledButton, StyledContainer } from "./styled";
+import { StyledButton, StyledContainer, StyledSpinner } from "./styled";
 import * as selectors from "./selectors/bookList";
 import { BookPagination } from "../../components/Pagination";
 import { PreLoader } from "../../components/PreLoader";
@@ -31,6 +31,7 @@ import {
   MODAL_UPDATE_NAME,
   MODAL_DELETE_NAME,
 } from "./constants";
+import { Spin } from "antd";
 
 const BookList = () => {
   const loading = useSelector(selectors.bookListLoadingSelector);
@@ -50,7 +51,7 @@ const BookList = () => {
   useEffect(() => {
     dispatch(bookListFetch());
     return () => dispatch(bookListResetAction());
-  }, [dispatch, page]);
+  }, [dispatch]);
 
   const handlePagination = (index) => {
     const newOffset = (index * itemsPerPage) % data.length;
@@ -98,29 +99,35 @@ const BookList = () => {
         </StyledButton>
         {
           <>
-            <StyledContainer>
-              {loading && !error && (
-                <>
-                  {[...Array(bookList.length || itemsPerPage).keys()].map(
-                    (item) => (
-                      <PreLoader key={item} />
-                    )
-                  )}
-                </>
-              )}
-              {!loading && !error && data.length > 0 && (
-                <>
-                  {bookList.map((book) => (
-                    <BookCard
-                      key={book._id}
-                      data={book}
-                      onEdit={handleEditModalOpen}
-                      onDelete={handleDeleteModalOpen}
-                    />
-                  ))}
-                </>
-              )}
-            </StyledContainer>
+            <StyledSpinner
+              spinning={loading}
+              style={{ maxHeight: "none" }}
+              size="large"
+            >
+              <StyledContainer>
+                {loading && !error && data.length == 0 && (
+                  <>
+                    {[...Array(bookList.length || itemsPerPage).keys()].map(
+                      (item) => (
+                        <PreLoader key={item} />
+                      )
+                    )}
+                  </>
+                )}
+                {!error && data.length > 0 && (
+                  <>
+                    {bookList.map((book) => (
+                      <BookCard
+                        key={book._id}
+                        data={book}
+                        onEdit={handleEditModalOpen}
+                        onDelete={handleDeleteModalOpen}
+                      />
+                    ))}
+                  </>
+                )}
+              </StyledContainer>
+            </StyledSpinner>
             {!loading && !error && data.length > 0 && (
               <BookPagination
                 currentPage={page}

@@ -17,6 +17,8 @@ import {
   bookDeleteErrorAction,
   bookDeleteInProgressAction,
   bookListResetAction,
+  bookListUpdateResetAction,
+  bookListDeleteResetAction,
 } from "../reducer/bookList";
 
 import { modalOpenToggleAction } from "../../../store/modal/reducer/modal";
@@ -80,10 +82,11 @@ export const bookItemUpdate = createAsyncThunk(
       dispatch(bookUpdateSuccessAction());
       dispatch(modalOpenToggleAction());
       toast.success("Book was updated");
-      dispatch(bookListResetAction());
+      dispatch(bookListUpdateResetAction());
       await dispatch(bookListFetch());
     } catch (error) {
       toast.error("Something went wrong");
+      console.log(error);
       dispatch(bookUpdateErrorAction(error.data));
     }
   }
@@ -100,7 +103,7 @@ export const bookItemDelete = createAsyncThunk(
       dispatch(bookDeleteSuccessAction());
       dispatch(modalOpenToggleAction());
       toast.success("Book was deleted");
-      dispatch(bookListResetAction());
+      dispatch(bookListDeleteResetAction());
       await dispatch(bookListFetch());
     } catch (error) {
       toast.error("Something went wrong");

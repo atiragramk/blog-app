@@ -16,7 +16,7 @@ export const Modal = ({
       onCancel={onCancel}
       confirmLoading={loading}
       footer={[
-        <StyledButton key="cancel" onClick={onCancel}>
+        <StyledButton key="cancel" loading={loading} onClick={onCancel}>
           Cancel
         </StyledButton>,
         <Button
@@ -40,13 +40,15 @@ export const Modal = ({
 
 Modal.defaultProps = {
   onSave: () => {},
+  formName: "",
+  disable: false,
 };
 
 Modal.propTypes = {
   children: PropTypes.node.isRequired,
   onCancel: PropTypes.func.isRequired,
   formName: PropTypes.string,
-  loading: PropTypes.bool,
+  loading: PropTypes.bool.isRequired,
   onSave: PropTypes.func,
   disable: PropTypes.bool,
 };

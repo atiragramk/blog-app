@@ -26,13 +26,12 @@ export const UpdateBookModal = ({ onSave, onCancel }) => {
       formName="edit"
       disable={!data}
     >
-      <StyledSpin spinning={loading} />
-      <>
-        {!loading && data && (
+      <StyledSpin size="middle" spinning={loading}>
+        {Object.keys(data).length > 0 && (
           <BookForm mode="edit" onSave={onSave} data={data} name="edit" />
         )}
         {!data && <Text type="danger"> Something went wrong</Text>}
-      </>
+      </StyledSpin>
     </Modal>
   );
 };

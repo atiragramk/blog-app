@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import { Spinner, Container } from "reactstrap";
+import { Container } from "reactstrap";
 import ReactPaginate from "react-paginate";
 import Button from "antd/lib/button";
+import Spin from "antd/lib/spin";
 
 export const StyledButton = styled(Button)`
   display: block;
@@ -29,14 +30,15 @@ export const StyledButton = styled(Button)`
   }
 `;
 
-export const StyledSpinner = styled(Spinner)`
-  display: flex;
-  margin: 0 auto;
-  color: rgb(110 45 53);
+export const StyledSpinner = styled(Spin)`
+  .ant-spin-dot-item {
+    background-color: rgb(255 186 89);
+  }
 `;
 
 export const StyledContainer = styled(Container)`
   display: flex;
+  justify-content: center;
   padding: 0;
   flex-direction: row;
   flex-wrap: wrap;

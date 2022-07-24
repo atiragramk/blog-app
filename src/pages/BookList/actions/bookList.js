@@ -63,5 +63,13 @@ export const bookDeleteError = (state) => {
 };
 
 export const bookListReset = (state) => {
-  return (state = initialState);
+  state = initialState;
+};
+
+export const bookListUpdateReset = (state) => {
+  state.updateState = initialState.updateState;
+};
+
+export const bookListDeleteReset = (state) => {
+  state.deleteState = initialState.deleteState;
 };

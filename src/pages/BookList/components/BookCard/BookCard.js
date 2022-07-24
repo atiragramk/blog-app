@@ -2,6 +2,7 @@ import { CardBody } from "reactstrap";
 import moment from "moment";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import PropTypes from "prop-types";
+import { bookItemDataPropType } from "../../../../propTypes/bookItemPropType";
 
 import {
   StyledCard,
@@ -41,7 +42,7 @@ export const BookCard = ({ data, onEdit, onDelete }) => {
 };
 
 BookCard.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: bookItemDataPropType.isRequired,
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
