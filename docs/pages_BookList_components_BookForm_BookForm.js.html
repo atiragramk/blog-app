@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/BookList/components/BookForm/BookForm.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/BookList/components/BookForm/BookForm.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// @ts-nocheck
+import React from "react";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { Input, Typography } from "antd";
+import PropTypes from "prop-types";
+import { bookItemDataPropType } from "../../../../propTypes/bookItemPropType";
+
+const createBookSchema = yup.object().shape({
+  title: yup.string().required("This field is required"),
+  description: yup.string().required("This field is required"),
+  pageCount: yup
+    .number()
+    .typeError("Value must be a number")
+    .required("This field is required")
+    .integer("Value must be an integer")
+    .positive("Value must be a positive number."),
+});
+
+/**
+ * Book form component
+ * @type {React.FC&lt;InferProps&lt;BookForm.propTypes>>}
+ * @returns {React.ReactElement | React.ReactComponentElement}
+ */
+export const BookForm = (props) => {
+  const { mode, data, name, onSave } = props;
+  const { Text, Title } = Typography;
+  const { TextArea } = Input;
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(createBookSchema),
+  });
+  /**
+   * Handle submit form function
+   * @async
+   * @type {import("react-hook-form").SubmitHandler&lt;import("react-hook-form").FieldValues>}
+   * @param {any} values - book data
+   */
+  const onSubmit = async (values) => {
+    try {
+      if (!data) {
+        onSave(values);
+      } else {
+        onSave({ ...values, id: data._id });
+      }
+    } catch (error) {}
+  };
+
+  return (
+    &lt;>
+      {mode === "create" &amp;&amp; &lt;Title level={3}>Create Book&lt;/Title>}
+      {mode === "edit" &amp;&amp; &lt;Title level={3}>Update Book&lt;/Title>}
+      &lt;form onSubmit={handleSubmit(onSubmit)} id={name}>
+        &lt;label>Book Title&lt;/label>
+        &lt;Controller
+          render={({ field }) => &lt;Input {...field} />}
+          name="title"
+          control={control}
+          defaultValue={data?.title || ""}
+        />
+        {errors.title &amp;&amp; (
+          &lt;Text style={{ display: "block" }} type="danger">
+            {errors.title.message}
+          &lt;/Text>
+        )}
+        &lt;label>Description&lt;/label>
+        &lt;Controller
+          render={({ field }) => (
+            &lt;TextArea style={{ height: "80px" }} {...field} />
+          )}
+          name="description"
+          control={control}
+          defaultValue={data?.description || ""}
+        />
+        {errors.description &amp;&amp; (
+          &lt;Text style={{ display: "block" }} type="danger">
+            {errors.description.message}
+          &lt;/Text>
+        )}
+
+        &lt;label>Page Count&lt;/label>
+        &lt;Controller
+          render={({ field }) => &lt;Input {...field} />}
+          name="pageCount"
+          control={control}
+          defaultValue={data?.pageCount}
+        />
+        {errors.pageCount &amp;&amp; (
+          &lt;Text style={{ display: "block" }} type="danger">
+            {errors.pageCount.message}
+          &lt;/Text>
+        )}
+      &lt;/form>
+    &lt;/>
+  );
+};
+
+BookForm.defaultProps = {
+  data: null,
+  mode: "create",
+  name: "create",
+  onSave: () => {},
+};
+
+BookForm.propTypes = {
+  mode: PropTypes.string,
+  data: bookItemDataPropType,
+  name: PropTypes.string,
+  onSave: PropTypes.func,
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#BookForm">BookForm</a></li><li><a href="global.html#bookItemCreate">bookItemCreate</a></li><li><a href="global.html#bookItemDelete">bookItemDelete</a></li><li><a href="global.html#bookItemUpdate">bookItemUpdate</a></li><li><a href="global.html#bookItemUpdateDataFetch">bookItemUpdateDataFetch</a></li><li><a href="global.html#BookList">BookList</a></li><li><a href="global.html#bookListFetch">bookListFetch</a></li><li><a href="global.html#createBook">createBook</a></li><li><a href="global.html#deleteBook">deleteBook</a></li><li><a href="global.html#getAllBooks">getAllBooks</a></li><li><a href="global.html#getBook">getBook</a></li><li><a href="global.html#updateBook">updateBook</a></li><li><a href="global.html#useAxios">useAxios</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Mon Jul 25 2022 18:01:06 GMT+0300 (Eastern European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

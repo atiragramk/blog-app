@@ -13,6 +13,7 @@ import {
   StyledDate,
   StyledButton,
 } from "./styled";
+import React from "react";
 
 export const BookCard = ({ data, onEdit, onDelete }) => {
   const { _id: id, title, description, publishDate } = data;

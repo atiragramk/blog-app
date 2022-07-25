@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -17,11 +18,15 @@ const createBookSchema = yup.object().shape({
     .positive("Value must be a positive number."),
 });
 
+/**
+ * Book form component
+ * @type {React.FC<InferProps<BookForm.propTypes>>}
+ * @returns {React.ReactElement | React.ReactComponentElement}
+ */
 export const BookForm = (props) => {
   const { mode, data, name, onSave } = props;
   const { Text, Title } = Typography;
   const { TextArea } = Input;
-  console.log(data);
 
   const {
     control,
@@ -30,7 +35,12 @@ export const BookForm = (props) => {
   } = useForm({
     resolver: yupResolver(createBookSchema),
   });
-
+  /**
+   * Handle submit form function
+   * @async
+   * @type {import("react-hook-form").SubmitHandler<import("react-hook-form").FieldValues>}
+   * @param {any} values - book data
+   */
   const onSubmit = async (values) => {
     try {
       if (!data) {
@@ -92,11 +102,14 @@ export const BookForm = (props) => {
 
 BookForm.defaultProps = {
   data: null,
+  mode: "create",
+  name: "create",
+  onSave: () => {},
 };
 
 BookForm.propTypes = {
-  mode: PropTypes.string.isRequired,
+  mode: PropTypes.string,
   data: bookItemDataPropType,
-  name: PropTypes.string.isRequired,
-  onSave: PropTypes.func.isRequired,
+  name: PropTypes.string,
+  onSave: PropTypes.func,
 };

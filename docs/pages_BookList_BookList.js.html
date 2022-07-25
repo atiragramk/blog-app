@@ -1,4 +1,32 @@
-//@ts-check
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/BookList/BookList.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/BookList/BookList.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>//@ts-check
 import React from "react";
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -149,35 +177,35 @@ const BookList = () => {
   );
 
   return (
-    <ErrorBoundary>
-      <Container>
-        <StyledButton onClick={handleCreateModalOpenToggle} type="primary">
+    &lt;ErrorBoundary>
+      &lt;Container>
+        &lt;StyledButton onClick={handleCreateModalOpenToggle} color="light">
           Create book
-        </StyledButton>
+        &lt;/StyledButton>
         {
-          <>
-            <StyledSpinner
+          &lt;>
+            &lt;StyledSpinner
               spinning={loading}
               style={{ maxHeight: "none" }}
               size="large"
             >
-              <StyledContainer>
-                {loading && !error && data.length === 0 && (
-                  <>
+              &lt;StyledContainer>
+                {loading &amp;&amp; !error &amp;&amp; data.length === 0 &amp;&amp; (
+                  &lt;>
                     {[...Array(bookList.length || itemsPerPage).keys()].map(
                       (item) => (
-                        <PreLoader key={item} />
+                        &lt;PreLoader key={item} />
                       )
                     )}
-                  </>
+                  &lt;/>
                 )}
-                {!error && data.length > 0 && (
-                  <>
+                {!error &amp;&amp; data.length > 0 &amp;&amp; (
+                  &lt;>
                     {bookList.map(
                       (
-                        /** @type {import("prop-types").InferProps<{ _id: import("prop-types").Requireable<string>; title: import("prop-types").Requireable<string>; description: import("prop-types").Requireable<string>; pageCount: import("prop-types").Requireable<string>; publishDate: import("prop-types").Requireable<string>; createdAt: import("prop-types").Requireable<string>; updatedAt: import("prop-types").Requireable<string>; }>} */ book
+                        /** @type {import("prop-types").InferProps&lt;{ _id: import("prop-types").Requireable&lt;string>; title: import("prop-types").Requireable&lt;string>; description: import("prop-types").Requireable&lt;string>; pageCount: import("prop-types").Requireable&lt;string>; publishDate: import("prop-types").Requireable&lt;string>; createdAt: import("prop-types").Requireable&lt;string>; updatedAt: import("prop-types").Requireable&lt;string>; }>} */ book
                       ) => (
-                        <BookCard
+                        &lt;BookCard
                           key={book._id}
                           data={book}
                           onEdit={handleEditModalOpen}
@@ -185,41 +213,64 @@ const BookList = () => {
                         />
                       )
                     )}
-                  </>
+                  &lt;/>
                 )}
-              </StyledContainer>
-            </StyledSpinner>
-            {!loading && !error && data.length > 0 && (
-              <BookPagination
+              &lt;/StyledContainer>
+            &lt;/StyledSpinner>
+            {!loading &amp;&amp; !error &amp;&amp; data.length > 0 &amp;&amp; (
+              &lt;BookPagination
                 currentPage={page}
                 onPagination={handlePagination}
                 pageCount={pageCount}
               />
             )}
-          </>
+          &lt;/>
         }
-        {open && name === MODAL_CREATE_NAME && (
-          <CreateBookModal
+        {open &amp;&amp; name === MODAL_CREATE_NAME &amp;&amp; (
+          &lt;CreateBookModal
             onSave={handleCreateBook}
             onCancel={handleCreateModalOpenToggle}
           />
         )}
-        {open && name === MODAL_UPDATE_NAME && (
-          <UpdateBookModal
+        {open &amp;&amp; name === MODAL_UPDATE_NAME &amp;&amp; (
+          &lt;UpdateBookModal
             onSave={handleUpdateBook}
             onCancel={handleEditModalClose}
           />
         )}
-        {open && name === MODAL_DELETE_NAME && (
-          <DeleteBookModal
+        {open &amp;&amp; name === MODAL_DELETE_NAME &amp;&amp; (
+          &lt;DeleteBookModal
             onSave={handleDeleteBook}
             onCancel={handleDeleteModalOpen}
           />
         )}
-        {error && !loading && <ErrorMessage />}
-      </Container>
-    </ErrorBoundary>
+        {error &amp;&amp; !loading &amp;&amp; &lt;ErrorMessage />}
+      &lt;/Container>
+    &lt;/ErrorBoundary>
   );
 };
 
 export default BookList;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#BookForm">BookForm</a></li><li><a href="global.html#bookItemCreate">bookItemCreate</a></li><li><a href="global.html#bookItemDelete">bookItemDelete</a></li><li><a href="global.html#bookItemUpdate">bookItemUpdate</a></li><li><a href="global.html#bookItemUpdateDataFetch">bookItemUpdateDataFetch</a></li><li><a href="global.html#BookList">BookList</a></li><li><a href="global.html#bookListFetch">bookListFetch</a></li><li><a href="global.html#createBook">createBook</a></li><li><a href="global.html#deleteBook">deleteBook</a></li><li><a href="global.html#getAllBooks">getAllBooks</a></li><li><a href="global.html#getBook">getBook</a></li><li><a href="global.html#updateBook">updateBook</a></li><li><a href="global.html#useAxios">useAxios</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Mon Jul 25 2022 18:01:06 GMT+0300 (Eastern European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

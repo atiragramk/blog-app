@@ -1,7 +1,8 @@
-import { Button, Modal as AntdModal } from "antd";
+import { Button, Modal as AntdModal, Typography } from "antd";
 import { StyledButton } from "./styled";
 import PropTypes from "prop-types";
 
+const { Text } = Typography;
 export const Modal = ({
   children,
   onCancel,
@@ -16,7 +17,12 @@ export const Modal = ({
       onCancel={onCancel}
       confirmLoading={loading}
       footer={[
-        <StyledButton key="cancel" loading={loading} onClick={onCancel}>
+        <StyledButton
+          key="cancel"
+          loading={loading}
+          onClick={onCancel}
+          disabled={loading}
+        >
           Cancel
         </StyledButton>,
         <Button
@@ -42,6 +48,9 @@ Modal.defaultProps = {
   onSave: () => {},
   formName: "",
   disable: false,
+  children: <Text>Modal window</Text>,
+  loading: false,
+  onCancel: () => {},
 };
 
 Modal.propTypes = {

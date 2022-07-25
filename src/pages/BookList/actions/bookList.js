@@ -41,6 +41,7 @@ export const bookUpdateInProgress = (state) => {
 export const bookUpdateSuccess = (state) => {
   state.updateState.loading = false;
 };
+
 export const bookUpdateError = (state) => {
   state.updateState.loading = false;
   state.updateState.error = true;
