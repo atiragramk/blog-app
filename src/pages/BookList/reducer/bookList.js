@@ -65,7 +65,7 @@ const bookListSlice = createSlice({
     builder
       .addCase(bookListFetch.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.error = false;
       })
       .addCase(bookListFetch.fulfilled, (state, action) => {
         state.loading = false;

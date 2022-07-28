@@ -101,7 +101,6 @@ export const BookForm = (props) => {
 };
 
 BookForm.defaultProps = {
-  data: null,
   mode: "create",
   name: "create",
   onSave: () => {},

@@ -42,6 +42,15 @@ export const BookCard = ({ data, onEdit, onDelete }) => {
   );
 };
 
+BookCard.defaultProps = {
+  data: {
+    _id: "",
+    title: "",
+    description: "",
+    publishDate: "",
+  },
+};
+
 BookCard.propTypes = {
   data: bookItemDataPropType.isRequired,
   onEdit: PropTypes.func.isRequired,

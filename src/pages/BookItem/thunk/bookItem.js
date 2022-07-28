@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getBook } from "../../../api/books";
 
-const BOOK_ITEM_FETCH_THUNK_TYPE = "BOOK_ITEM_FETCH_THUNK_TYPE";
+export const BOOK_ITEM_FETCH_THUNK_TYPE = "BOOK_ITEM_FETCH_THUNK_TYPE";
 export const bookItemFetch = createAsyncThunk(
   BOOK_ITEM_FETCH_THUNK_TYPE,
   async (id, { rejectWithValue }) => {

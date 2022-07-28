@@ -7,6 +7,7 @@ import { BookForm } from "../BookForm/BookForm";
 import { StyledSpin } from "../DeleteBookModal/styled";
 import { Typography } from "antd";
 import PropTypes from "prop-types";
+import { bookListUpdateResetAction } from "../../reducer/bookList";
 
 export const UpdateBookModal = ({ onSave, onCancel }) => {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ export const UpdateBookModal = ({ onSave, onCancel }) => {
 
   useEffect(() => {
     dispatch(bookItemUpdateDataFetch(fetchData));
+    return () => dispatch(bookListUpdateResetAction());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

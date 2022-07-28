@@ -4,20 +4,20 @@ import { bookPagination } from "../actions/pagination";
 
 const name = "PAGINATION";
 
-const initialState = {
+export const initialState = {
   page: 0,
   offset: 0,
   itemsPerPage: 9,
 };
 
 const paginationSlice = createSlice({
-    name,
-    initialState,
-    reducers: {
-        bookPaginationSet: bookPagination
-    }
-})
+  name,
+  initialState,
+  reducers: {
+    bookPagination,
+  },
+});
 
-export const {bookPaginationSet} = paginationSlice.actions;
+export const { bookPagination: bookPaginationAction } = paginationSlice.actions;
 
 export default paginationSlice.reducer;

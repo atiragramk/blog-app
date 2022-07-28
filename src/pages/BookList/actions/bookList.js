@@ -1,34 +1,15 @@
 import { initialState } from "../reducer/bookList";
 
-export const bookFetchStart = () => {};
-
-export const bookFetchInProgress = (state) => {
-  state.loading = true;
-  state.error = null;
-};
-
-export const bookFetchSuccess = (state, action) => {
-  state.loading = false;
-  state.data = action.payload;
-};
-
-export const bookFetchError = (state) => {
-  state.loading = false;
-  state.error = true;
-};
-
-export const bookPagination = (state, action) => {
-  return { ...state, ...action.payload };
-};
-
 export const bookCreateInProgress = (state) => {
   state.createState.loading = true;
+  state.createState.error = false;
 };
 export const bookCreateSuccess = (state) => {
   state.createState.loading = false;
 };
 export const bookCreateError = (state) => {
-  state.createState.loading = true;
+  state.createState.loading = false;
+  state.createState.error = true;
 };
 
 export const bookUpdateItemIdSet = (state, action) => {

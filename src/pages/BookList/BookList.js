@@ -10,7 +10,7 @@ import { StyledButton, StyledContainer, StyledSpinner } from "./styled";
 import * as selectors from "./selectors/bookList";
 import { BookPagination } from "../../components/Pagination";
 import { PreLoader } from "../../components/PreLoader";
-import { bookPaginationSet } from "../../components/Pagination/reducer/pagination";
+import { bookPaginationAction } from "../../components/Pagination/reducer/pagination";
 import { bookListPaginationSelector } from "../../components/Pagination/selectors/pagination";
 import { modalStateSelector } from "../../store/modal/selectors/modal";
 import { modalOpenToggleAction } from "../../store/modal/reducer/modal";
@@ -76,7 +76,7 @@ const BookList = () => {
    */
   const handlePagination = (index) => {
     const newOffset = (index * itemsPerPage) % data.length;
-    dispatch(bookPaginationSet({ page: index, offset: newOffset }));
+    dispatch(bookPaginationAction({ page: index, offset: newOffset }));
   };
   /**
    * Create book function
