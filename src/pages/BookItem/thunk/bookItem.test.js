@@ -47,9 +47,11 @@ describe("bookItemFetch", () => {
     expect(thunkPromise.arg).toBe(args);
 
     await thunkPromise;
+    const itemFetchParams = [thunkPromise.requestId, args];
+
     expect(dispatch).toHaveBeenNthCalledWith(
       1,
-      bookItemFetch.pending(thunkPromise.requestId, args)
+      bookItemFetch.pending(...itemFetchParams)
     );
     expect(dispatch).toHaveBeenNthCalledWith(
       2,
